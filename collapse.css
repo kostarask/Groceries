@@ -1,0 +1,13 @@
+body {background:#FAD0A0; font-family:Arial; font-size:1em}
+
+table {width:600px; border-collapse:collapse; margin:5%;}
+table, tr, th, td {border:5px solid #FAD0A0; padding:10px; background:white;}
+table tr th {width:160px; background:navy; color:white;}
+
+tr.expand td, th {border-style:solid none solid none; text-align:center;}
+tr.expand td:hover {cursor: pointer;}
+td.desc {display:none; background:lightblue; padding:20px;}
+
+@media only screen and (max-width: 720px){
+    table {margin:10%; width:80%}
+}
