@@ -150,7 +150,7 @@ function venue_min($prod_name){
 }
 
 //Function that checks if the requested entry allready exists in the database
-function checkDbForEntry2($tableName, $collumnName, $condition, $error){
+function checkDbForEntry2($tableName, $collumnName, $condition, $action, $action2=null){
     global $mysqli;
     $result = $mysqli -> query("SELECT * FROM $tableName 
                                 WHERE $collumnName = '$condition'");
@@ -158,7 +158,19 @@ function checkDbForEntry2($tableName, $collumnName, $condition, $error){
 
         unset($_SERVER['REQUEST_METHOD']);
         unset($_POST['category']);
-        header("location: $error");
+        header("location: $action");
+    }
+
+    if(isset($action2) && ($result-> num_rows<0)){
+        unset($_SERVER['REQUEST_METHOD']);
+        unset($_POST['category']);
+        header("location: $action2");
+    
+    }
+    if(isset($action2) && ($result-> num_rows>0)){
+        unset($_SERVER['REQUEST_METHOD']);
+        unset($_POST['category']);
+        header("location: $action");
     }
   }
 
