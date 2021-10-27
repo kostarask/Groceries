@@ -163,7 +163,7 @@ function checkDbForEntry2($tableName, $collumnName, $condition, $action,){
   }
 
 //Function that checks if the requested entry allready exists in the database
-function checkDbForEntry($tableName, $collumnName, $condition){
+function checkDbForEntrySimple($tableName, $collumnName, $condition){
     global $mysqli;
     $result = $mysqli -> query("SELECT * FROM $tableName 
                                 WHERE $collumnName = '$condition'");

@@ -17,7 +17,7 @@ if(isset($_GET['message'])){
     popMessage($_GET['message']);
 }
 
-$categories = $mysqli->query(" SELECT products_final.product_name AS productName,
+$products = $mysqli->query(" SELECT products_final.product_name AS productName,
                                         products_final.product_id AS productId,
                                         product_subtypes.product_subtype_name AS productSubtype,
                                         product_types.product_type_name AS productType,
@@ -50,7 +50,7 @@ $categories = $mysqli->query(" SELECT products_final.product_name AS productName
             </thead>
             <tbody>
                 <?php
-                    while ($row = $categories->fetch_assoc()) {
+                    while ($row = $products->fetch_assoc()) {
 
                         echo '
                             <tr>
