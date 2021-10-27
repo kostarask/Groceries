@@ -11,9 +11,19 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
     $product_name = $_POST['product_name'];
 
-    checkDbForEntry2('products_final','product_name', $product_name,
-                    'test2.php?message=Error: '.$product_name.'',
-                    'test2.php?message=Error: Product name does not exists!');
+    // checkDbForEntry2('products_final',
+    //                 'product_name',
+    //                  $product_name,
+    //                 'test2.php?message=Error: '.$product_name.'',
+    //                 'test2.php?message=Error: Product name does not exists!');
+
+    if(checkDbForEntry('products_final', 'product_name', $product_name)){
+
+      header("location: test2.php?message='.$product_name.");
+
+    }else{
+      header("location: test2.php?message=Error: Product does not exist!");
+    }
   }
 
 //Query that gets all data from products table
