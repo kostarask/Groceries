@@ -1,6 +1,9 @@
 <?php 
 include("includes/header.php");
 include('includes/db.php');
+include("includes/functions.php");
+
+
  ?>
 <!DOCTYPE html>
 <head>
@@ -12,6 +15,9 @@ include('includes/db.php');
 </head>
 
 <?php 
+if(isset($_GET['message'])){
+    popMessage($_GET['message']);
+}
 
 $purchases = $mysqli->query("SELECT purchases.purchace_id AS purchaseId,
                                     products_final.product_name AS productName,
@@ -26,7 +32,8 @@ $purchases = $mysqli->query("SELECT purchases.purchace_id AS purchaseId,
                             WHERE purchases.product_id=products_final.product_id
                             AND purchases.venue_id=venues.venue_id
                             AND products_final.product_tag_id=product_tags.product_tag_id
-                            AND products_final.product_unit_id=product_units.product_unit_id");
+                            AND products_final.product_unit_id=product_units.product_unit_id
+                            ORDER BY date_of_purchase DESC");
 ?>
 
 <body>
@@ -52,11 +59,11 @@ $purchases = $mysqli->query("SELECT purchases.purchace_id AS purchaseId,
                         echo '<tr>
                                 <td>'.$row["purchaseId"].'</td>
                                 <td><a href= "product_history.php?prod_name='.$row["productName"].'">'.$row["productName"].'</a></td>
-                                <td>'.$row["productPrice"].'&euro;</td>
+                                <td>'.$row["productPrice"].' &euro;</td>
                                 <td>'.$row["purchaseDate"].'</td>
                                 <td>'.$row["venueName"].'</td>
-                                <td>'.$row["productQuantity"].$row["unitName"].'</td>
-                                <td>'.$row["pricePerQuantity"].'&euro;&#8725;'.$row["unitName"].'</td>
+                                <td>'.$row["productQuantity"].' '.$row["unitName"].'</td>
+                                <td>'.$row["pricePerQuantity"].' &euro; &#8725;'.' '.$row["unitName"].'</td>
                                 <td>'.$row["productTag"].'</td>
                             </tr>';
                             

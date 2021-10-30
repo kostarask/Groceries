@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         VALUES ('$productId2', '$productPrice', '$productQuantity', '$pricePerQuantity', '$dateOfPurchase', '$venueId')";
 
   if($mysqli->query($sql)===true){
-    header("location: success.php?message=Success $productId2");
+    header("location: show_purchases.php?message=Purchased logged successfully!");
   }else{
       $_SESSION['message']= "New service was not added!";
       header( "location: error.php?message=Fuck" );
@@ -56,10 +56,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link rel="stylesheet" type="text/css" href="src/css/style.css" />
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="src/css/navbar.css" />
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="src/js/jquery-1.4.2.min.js"></script>
-<script type="text/javascript" src="src/js/jquery.autocomplete.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
 <form class="form-horizontal" action="add_purchase.php" method="post" enctype="multipart/form-data">
@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <div class="form-group">
     <label class="col-md-4 control-label" for="product_name">Product quantity in <u><?php echo $productUnit?></u>:</label>  
     <div class="col-md-4">
-    <input type="number" min="0" step="any" id="product_quantity" name="product_quantity" placeholder="Please enter the quantity.." class="form-control input-md" required type="text">
+    <input type="number" min="0" step="any" id="product_quantity" name="product_quantity" placeholder="Please enter the quantity.." class="form-control input-md" required autocomplete= "off">
 
     </div>
   </div>
