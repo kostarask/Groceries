@@ -12,7 +12,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $product_name = $_POST['product_name'];
 
     if(checkDbForEntrySimple('products_final', 'product_name', $product_name)){
-      header("location: add_purchase.php?message=$product_name");
+      header("location: add_purchase.php?productName=$product_name");
     }else{
       header("location: select_product.php?message=Error: Product does not exist!");
     }
@@ -46,23 +46,23 @@ $products = $mysqli->query("SELECT products_final.product_name AS productName,
 <legend>New Category</legend>
 
 <!-- Text input-->
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="product_name">Select Product:</label>  
-      <div class="col-md-4">
-      <input list = "products" id="product_name" name="product_name" placeholder="Please add name..." class="form-control input-md" required autocomplete="off" type="text">
-      <datalist id="products">
-          <optgroup label= "Products">
-          <?php
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="product_name">Select Product:</label>  
+    <div class="col-md-4">
+    <input list = "products" id="product_name" name="product_name" placeholder="Please add name..." class="form-control input-md" required autocomplete="off" type="text">
+    <datalist id="products">
+        <optgroup label= "Products">
+        <?php
 
-            while($row = $products -> fetch_assoc()){
-                echo '<option value = "'.$row["productName"].'">'.$row["productSubtype"].', '.$row["productType"].', '.$row["productCategory"].', '.$row["productTag"].'</option>';
-            }
+          while($row = $products -> fetch_assoc()){
+              echo '<option value = "'.$row["productName"].'">'.$row["productSubtype"].', '.$row["productType"].', '.$row["productCategory"].', '.$row["productTag"].'</option>';
+          }
 
-          ?>
-          </optgroup>
-      </datalist>
-      </div>
+        ?>
+        </optgroup>
+    </datalist>
     </div>
+  </div>
 
 <!-- Button -->
 <div class="form-group">

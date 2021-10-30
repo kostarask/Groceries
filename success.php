@@ -1,5 +1,5 @@
 <?php
-include("src/functions.php");
+include("includes/functions.php");
 
 
 ?>

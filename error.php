@@ -1,13 +1,25 @@
+<?php
+include("includes/functions.php");
+
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Error</title>
+	<title>Success</title>
 </head>
 <body>
-<?php
-    header("location:test2.php");
-    
-    ?>
+<p>Great Success</p>
+
+<?php 
+if(isset($_GET['message'])){
+    popMessage($_GET['message']);
+}
+
+?>
+
 </body>
 </html>
