@@ -1,7 +1,7 @@
 <?php 
-include("header.php");
-include("src/functions.php");
-include 'db.php';
+include("includes/header.php");
+require("includes/db.php");
+include("includes/functions.php");
  ?>
 <!DOCTYPE html>
 <head>
