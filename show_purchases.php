@@ -22,17 +22,21 @@ if(isset($_GET['message'])){
 $purchases = $mysqli->query("SELECT purchases.purchace_id AS purchaseId,
                                     products_final.product_name AS productName,
                                     purchases.product_price AS productPrice,
+                                    purchases.number_of_items AS munOfItems,
+                                    purchases.price_per_item AS pricePerItem,
                                     purchases.date_of_purchase AS purchaseDate,
                                     venues.venue_name AS venueName,
                                     purchases.qnt_of_product AS productQuantity,
                                     purchases.price_per_qnt AS pricePerQuantity,
                                     product_tags.product_tag_name AS productTag,
-                                    product_units.product_unit_name AS unitName
-                            FROM products_final,purchases,venues,product_tags,product_units
+                                    product_units.product_unit_name AS unitName,
+                                    offers.offer_name AS offerName
+                            FROM products_final,purchases,venues,product_tags,product_units,offers
                             WHERE purchases.product_id=products_final.product_id
                             AND purchases.venue_id=venues.venue_id
                             AND products_final.product_tag_id=product_tags.product_tag_id
                             AND products_final.product_unit_id=product_units.product_unit_id
+                            AND purchases.offer_id=offers.offer_id
                             ORDER BY date_of_purchase DESC");
 ?>
 
@@ -49,6 +53,9 @@ $purchases = $mysqli->query("SELECT purchases.purchace_id AS purchaseId,
                     <th>Venue</th>
                     <th data-type = "number">Quantity</th>
                     <th data-type = "number">Value per Quantity</th>
+                    <th data-type = "number">Items Purchased</th>
+                    <th data-type = "number">Price Per Item</th>
+                    <th>Offer</th>
                     <th>Product Tag</th>
                 </tr>
             </thead>
@@ -64,6 +71,9 @@ $purchases = $mysqli->query("SELECT purchases.purchace_id AS purchaseId,
                                 <td>'.$row["venueName"].'</td>
                                 <td>'.$row["productQuantity"].' '.$row["unitName"].'</td>
                                 <td>'.$row["pricePerQuantity"].' &euro; &#8725;'.' '.$row["unitName"].'</td>
+                                <td>'.$row["munOfItems"].'</td>
+                                <td>'.$row["pricePerItem"].' &euro; &#8725; item</td>
+                                <td>'.$row["offerName"].'</td>
                                 <td>'.$row["productTag"].'</td>
                             </tr>';
                             

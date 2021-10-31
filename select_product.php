@@ -43,7 +43,7 @@ $products = $mysqli->query("SELECT products_final.product_name AS productName,
 
 <form class="form-horizontal" action="select_product.php" method="post" enctype="multipart/form-data">
 <fieldset class= "myForm">
-<legend>New Category</legend>
+<legend>Select Product:</legend>
 
 <!-- Text input-->
   <div class="form-group">

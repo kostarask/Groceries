@@ -68,7 +68,7 @@
 
 <form class="form-horizontal" action="add_prod.php" method="post" enctype="multipart/form-data">
 <fieldset class= "myForm">
-<legend>New Product Type</legend>
+<legend>New Product:</legend>
 
 <!-- Inout new product name-->
   <div class="form-group">

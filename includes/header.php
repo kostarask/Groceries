@@ -31,6 +31,7 @@
           <li><a class="dropdown-options" href="show_product_types.php">Product Types</a></li>          
           <li><a class="dropdown-options" href="show_product_subtypes.php">Product Subtypes</a></li>          
           <li><a class="dropdown-options" href="show_venues.php">Venues</a></li>          
+          <li><a class="dropdown-options" href="show_offers.php">Offers</a></li>          
         </ul>
       </li>
       <li class="active dropdown">
@@ -42,6 +43,7 @@
           <li><a href="add_product_type.php">Add Product Type</a></li>          
           <li><a href="add_product_subtype.php">Add Product Subtype</a></li>          
           <li><a href="add_venue.php">Add new venue</a></li>          
+          <li><a href="add_offer.php">Add new offer</a></li>          
         </ul>
       </li>
       
