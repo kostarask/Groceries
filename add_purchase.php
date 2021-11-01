@@ -37,6 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $offerName = $_POST['offer'];
   $qntItems = $_POST['num_of_items'];
   $productQuantity = $_POST['product_quantity'];
+
+
+  /**TODO!!!!! When units are items shit */
   $pricePerQuantity = $productPrice/($productQuantity*$qntItems);
   $pricePerQuantityOfItems = $productPrice/$qntItems;
 
@@ -125,6 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       </div>
     </div>
   
+  <!--TODO!!!! Disable if units=ITEM -->
   <!-- Enter Quantity -->
   <div class="form-group">
     <label class="col-md-4 control-label" for="product_quantity">Product quantity in <u><?php echo $productUnit?></u>:</label>  

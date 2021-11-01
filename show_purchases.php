@@ -62,10 +62,11 @@ $purchases = $mysqli->query("SELECT purchases.purchace_id AS purchaseId,
             <tbody>
                 <?php
                     while ($row = $purchases->fetch_assoc()) {
-
+/* TODO href problem!
+    NEED to pass id instead of name */
                         echo '<tr>
                                 <td>'.$row["purchaseId"].'</td>
-                                <td><a href= "product_history.php?prod_name='.$row["productName"].'">'.$row["productName"].'</a></td>
+                                <td><a href= "product_history.php?prod_id='.$row["productName"].'">'.$row["productName"].'</a></td>
                                 <td>'.$row["productPrice"].' &euro;</td>
                                 <td>'.$row["purchaseDate"].'</td>
                                 <td>'.$row["venueName"].'</td>
