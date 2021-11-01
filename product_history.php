@@ -1,5 +1,5 @@
 <?php 
-// include("includes/header.php");
+include("includes/header.php");
 require("includes/db.php");
 include("includes/functions.php");
 
@@ -79,7 +79,7 @@ if(isset($_GET['prod_id'])){
   
   <h1 class= "hed">Products</h1>
 
-    <div class = "tables">
+    <div class = "tables" style="height:200px">
       <table class= "table table-sortable">
         <thead>
             <tr>
