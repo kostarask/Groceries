@@ -1,42 +1,42 @@
 <?php
 include('includes/db.php');
 
-//Function to return minimum price
-function min_price($prod_name){
+//Function to return minimum price per item
+function min_price($prod_id){
     
     global $mysqli;
     
-    $result = $mysqli->query("SELECT product_price FROM purchases WHERE product_name='$prod_name' ORDER BY product_price DESC ");
+    $result = $mysqli->query("SELECT purchases.price_per_item AS pricePerItem FROM purchases WHERE product_id='$prod_id' ORDER BY purchases.price_per_item DESC ");
     
     while ($row2 = $result->fetch_assoc()){
         
-        $min = $row2["product_price"];
+        $min = $row2["pricePerItem"];
     }
         
     return $min;
 }
 
-//Function to return highest price
-function max_price($prod_name){
+//Function to return highest price per item
+function max_price($prod_id){
     
     global $mysqli;
     
-        $result = $mysqli->query("SELECT product_price FROM purchases WHERE product_name='$prod_name' ORDER BY product_price");
+        $result = $mysqli->query("SELECT purchases.price_per_item AS pricePerItem FROM purchases WHERE product_id='$prod_id' ORDER BY purchases.price_per_item");
     
     while ($row2 = $result->fetch_assoc()){
         
-        $max = $row2["product_price"];
+        $max = $row2["pricePerItem"];
     }
         
     return $max;
 }
 
-//Function to return average price
-function avg_price($prod_name){
+//Function to return average price per item
+function avg_price($prod_id){
     
     global $mysqli;
     
-        $result= $mysqli->query("SELECT AVG(product_price) AS avg FROM purchases WHERE product_name='$prod_name'");
+        $result= $mysqli->query("SELECT AVG(purchases.price_per_item) AS avg FROM purchases WHERE product_id='$prod_id'");
 
         $row = $result->fetch_assoc(); 
     
@@ -46,11 +46,11 @@ function avg_price($prod_name){
 }
 
 //Function to return highest price per quantity
-function max_price_per($prod_name){
+function max_price_per($prod_id){
     
     global $mysqli;
     
-    $result2 = $mysqli->query("SELECT price_per_qnt FROM purchases WHERE product_name='$prod_name' ORDER BY price_per_qnt ");
+    $result2 = $mysqli->query("SELECT price_per_qnt FROM purchases WHERE product_id='$prod_id' ORDER BY price_per_qnt ");
     
     while ($row2 = $result2->fetch_assoc()){
         
@@ -61,11 +61,11 @@ function max_price_per($prod_name){
 }
 
 //Function to return lowest price per quantity
-function min_price_per($prod_name){
+function min_price_per($prod_id){
     
     global $mysqli;
     
-    $result2 = $mysqli->query("SELECT price_per_qnt FROM purchases WHERE product_name='$prod_name' ORDER BY price_per_qnt DESC");
+    $result2 = $mysqli->query("SELECT price_per_qnt FROM purchases WHERE product_id='$prod_id' ORDER BY price_per_qnt DESC");
     
     while ($row2 = $result2->fetch_assoc()){
         
@@ -76,74 +76,90 @@ function min_price_per($prod_name){
 }
 
 //Function to return average price per quantity of product
-function avg_price_per($prod_name){
+function avg_price_per($prod_id){
     
     global $mysqli;
     
-        $result= $mysqli->query("SELECT AVG(price_per_qnt) AS avg FROM purchases WHERE product_name='$prod_name'");
+        $result= $mysqli->query("SELECT AVG(price_per_qnt) AS avg FROM purchases WHERE product_id='$prod_id'");
 
         $row = $result->fetch_assoc(); 
 
-        $avg = $english_format_number = number_format(round(floatval($row['avg']),2), 2, '.', '');;
+        $avg = $english_format_number = number_format(round(floatval($row['avg']),4), 4, '.', '');;
 
     return $avg;
 }
 
 //Function to return venue where highest price per quantity was recorded
-function venue_per_max($prod_name){
+function venue_per_max($prod_id){
     
     global $mysqli;
     
-    $result2 = $mysqli->query("SELECT venue FROM purchases WHERE product_name='$prod_name' ORDER BY price_per_qnt ");
+    $result2 = $mysqli->query("SELECT venues.venue_name AS venueName
+                                FROM purchases, venues
+                                WHERE product_id='$prod_id' 
+                                AND purchases.venue_id=venues.venue_id
+                                ORDER BY price_per_qnt");
     
     while ($row2 = $result2->fetch_assoc()){
         
-        $venue_max = $row2["venue"];
+        $venue_max = $row2["venueName"];
     }
         
     return $venue_max;
 }
 
 //Function to return venue where lowest price per quantity was recorded
-function venue_per_min($prod_name){
+function venue_per_min($prod_id){
     
     global $mysqli;
     
-    $result2 = $mysqli->query("SELECT venue FROM purchases WHERE product_name='$prod_name' ORDER BY price_per_qnt DESC");
+    $result2 = $mysqli->query("SELECT venues.venue_name AS venueName
+                                FROM purchases, venues
+                                WHERE product_id='$prod_id' 
+                                AND purchases.venue_id=venues.venue_id
+                                ORDER BY price_per_qnt DESC");
     
     while ($row2 = $result2->fetch_assoc()){
         
-        $venue_min = $row2["venue"];
+        $venue_min = $row2["venueName"];
     }
         
     return $venue_min;
 }
 
 //Function to return venue where highest price was recorded
-function venue_max($prod_name){
+function venue_max($prod_id){
     
     global $mysqli;
     
-    $result2 = $mysqli->query("SELECT venue FROM purchases WHERE product_name='$prod_name' ORDER BY product_price ");
-    
+    $result2 = $mysqli->query("SELECT venues.venue_name AS venueName
+                                FROM purchases, venues
+                                WHERE product_id='$prod_id' 
+                                AND purchases.venue_id=venues.venue_id
+                                ORDER BY purchases.price_per_item");
+
     while ($row2 = $result2->fetch_assoc()){
         
-        $venue_max = $row2["venue"];
+        $venue_max = $row2["venueName"];
     }
         
     return $venue_max;
 }
 
 //Function to return venue where lowest price was recorded
-function venue_min($prod_name){
+function venue_min($prod_id){
     
     global $mysqli;
     
-    $result2 = $mysqli->query("SELECT venue FROM purchases WHERE product_name='$prod_name' ORDER BY product_price DESC");
+    $result2 = $mysqli->query("SELECT venues.venue_name AS venueName
+                                FROM purchases, venues
+                                WHERE product_id='$prod_id' 
+                                AND purchases.venue_id=venues.venue_id
+                                ORDER BY purchases.price_per_item DESC");
     
     while ($row2 = $result2->fetch_assoc()){
         
-        $venue_min = $row2["venue"];
+        $venue_min = $row2["venueName"];
     }
         
     return $venue_min;
