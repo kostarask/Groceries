@@ -3,19 +3,21 @@
 require("includes/db.php");
 include("includes/functions.php");
 
-$pieResults = $mysqli->query("SELECT SUM(product_price) AS categoryExpenditure,
-                                     product_categories.category_name AS categoryName, 
-                                     product_types.product_type_name AS productTypeName, 
-                                     product_subtypes.product_subtype_name AS productSubtypeName, 
-                                     products_final.product_name AS productName, 
-                                     product_tags.product_tag_name AS productTag 
-                                FROM purchases,products_final,product_categories,product_types,product_subtypes,product_tags
-                                WHERE purchases.product_id=products_final.product_id
-                                AND products_final.product_subtype_id=product_subtypes.product_subtype_id
-                                AND product_subtypes.product_type_id=product_types.product_type_id
-                                AND product_types.category_id=product_categories.category_id
-                                AND products_final.product_tag_id=product_tags.product_tag_id
-                                GROUP BY products_final.product_name");
+$date=strtotime('2021-01-01');
+        $startDate = date( 'd/m/Y', $date);
+        $startDateDb = date( 'Y-m-d', $date);
+
+        $date=strtotime('Today');
+        $endDate = date( 'd/m/Y', $date);
+        $endDateDb = date( 'Y-m-d', $date);
+
+$pieResults = $mysqli->query("SELECT product_subtypes.product_subtype_name AS productSubtypeName,
+                                      SUM(purchases.product_price) AS totalSpent
+                              FROM products_final,purchases,product_subtypes
+                              WHERE purchases.product_id=products_final.product_id
+                              AND products_final.product_subtype_id=product_subtypes.product_subtype_id
+                              AND purchases.date_of_purchase BETWEEN '$startDateDb' AND '$endDateDb'
+                              GROUP BY product_subtypes.product_subtype_id");
 
 $pieResults2 = $mysqli->query("SELECT SUM(product_price) AS categoryExpenditure,
                                      product_categories.category_name AS categoryName, 
@@ -50,7 +52,7 @@ $pieResults2 = $mysqli->query("SELECT SUM(product_price) AS categoryExpenditure,
         var data = google.visualization.arrayToDataTable([
             ['Task', 'Hours per Day'],
             <?php while($row = $pieResults->fetch_assoc()){
-                echo "['".$row['productName']."', ".$row['categoryExpenditure']."],";
+                echo "['".$row['productSubtypeName']."', ".$row['totalSpent']."],";
                 }
             ?>
         ]);

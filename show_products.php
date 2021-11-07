@@ -3,16 +3,15 @@ include("includes/header.php");
 require("includes/db.php");
 include("includes/functions.php");
  ?>
+
 <!DOCTYPE html>
 <head>
     <title>Whatever</title>
     <meta name="viewport" content= "width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
-    <link rel="stylesheet" href="src/css/tablesort.css">
-</head>
-
-
-    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="src/css/style.css">
+</head>    
 
     <?php 
                
@@ -30,11 +29,23 @@ include("includes/functions.php");
                                             AND product_types.category_id=product_categories.category_id
                                             AND products_final.product_tag_id=product_tags.product_tag_id");
        ?>
-  <body>
-  <h1 class= "hed">Products</h1>
+<body>
+  <div class="container">
 
-    <div class = "tables">
-      <table class= "table table-sortable">
+    <h1 class= "hed">
+      <span>
+        Products
+      </span>
+    </h1>
+
+    <div class="custom-add-form">
+      <form action="add_prod.php" method="get">
+          <button type="submit">Add New Product</button>
+      </form>
+    </div>
+
+    <div class = "tables tables-grid">
+      <table class= "table table-sortable test2">
         <thead>
             <tr>
                 <th data-type = "number">Product ID</th>
@@ -66,12 +77,12 @@ include("includes/functions.php");
                       <td>'.$row["productType"].'</td>
                       <td>'.$row["productCategory"].'</td>
                       <td>'.$row["productTag"].'</td>
-                      <td>'.max_price($row["productId"]).'&euro; found at: '.venue_max($row["productId"]).'</td>
-                      <td>'.min_price($row["productId"]).'&euro; found at: '.venue_min($row["productId"]).'</td>
-                      <td>'.avg_price($row["productId"]).'&euro;</td>
-                      <td>'.max_price_per($row["productId"]).'&euro;&#8725;'.$row["productUnit"].' found at: '.venue_per_max($row["productId"]).' </td>
-                      <td>'.min_price_per($row["productId"]).'&euro;&#8725;'.$row["productUnit"].' found at: '.venue_per_min($row["productId"]).'</td>
-                      <td>'.avg_price_per($row["productId"]).'&euro;&#8725;'.$row["productUnit"].'</td>
+                      <td>'.max_price($row["productId"]).' &euro; found at: '.venue_max($row["productId"]).'</td>
+                      <td>'.min_price($row["productId"]).' &euro; found at: '.venue_min($row["productId"]).'</td>
+                      <td>'.avg_price($row["productId"]).' &euro;</td>
+                      <td>'.max_price_per($row["productId"]).' &euro;&#8725;'.$row["productUnit"].' found at: '.venue_per_max($row["productId"]).' </td>
+                      <td>'.min_price_per($row["productId"]).' &euro;&#8725;'.$row["productUnit"].' found at: '.venue_per_min($row["productId"]).'</td>
+                      <td>'.avg_price_per($row["productId"]).' &euro;&#8725;'.$row["productUnit"].'</td>
                   </tr>';
 
             }
@@ -79,7 +90,7 @@ include("includes/functions.php");
           </tbody>
         </table>
       </div>
-<script src="src/tablesort.js" ></script>
+  </div>
+  <script src="src/js/tablesort.js" ></script>
 </body>
-</html>
 

@@ -5,12 +5,13 @@ include("includes/functions.php");
 
 if(isset($_GET['prod_id'])){
     $prodId = $_GET['prod_id'];
-}
 
 
-        $chartInfo = $mysqli->query("SELECT purchases.price_per_item AS price, MONTH(purchases.date_of_purchase) AS monthOf
+
+        $chartInfo = $mysqli->query("SELECT purchases.price_per_item AS price, purchases.date_of_purchase AS monthOf
                                         FROM purchases
-                                        WHERE purchases.product_id=$prodId");
+                                        WHERE purchases.product_id=$prodId
+                                        ORDER BY monthOf ");
                 
                
         $products_array2 = $mysqli->query("SELECT products_final.product_id AS productId,
@@ -27,14 +28,14 @@ if(isset($_GET['prod_id'])){
                                             AND product_types.category_id=product_categories.category_id
                                             AND products_final.product_tag_id=product_tags.product_tag_id
                                             AND products_final.product_id=$prodId");
-
+}
  ?>
 <!DOCTYPE html>
 <head>
     <title>Whatever</title>
     <meta name="viewport" content= "width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
-    <link rel="stylesheet" href="src/css/tablesort.css">
+    <link rel="stylesheet" href="src/css/style.css">
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
@@ -56,7 +57,7 @@ if(isset($_GET['prod_id'])){
 
         var options = {
           title: 'Company Performance',
-          curveType: 'function',
+          curveType: 'none',
           legend: { position: 'bottom' }
         };
 
@@ -77,7 +78,7 @@ if(isset($_GET['prod_id'])){
        ?>
   <body>
   
-  <h1 class= "hed">Products</h1>
+  <h1 class= "hed"><span> Products</span></h1>
 
     <div class = "tables" style="height:200px">
       <table class= "table table-sortable">
@@ -125,7 +126,7 @@ if(isset($_GET['prod_id'])){
           </tbody>
         </table>
       </div>
-      <div id="piechart2" style="width: 900px; height: 500px;"></div>
+      <div id="piechart2" style="width: 1500px; height: 800px;"></div>
       
 <script src="src/tablesort.js" ></script>
 </body>

@@ -2,16 +2,15 @@
 include("includes/header.php");
 include('includes/db.php');
 include("includes/functions.php");
-
-
  ?>
+
 <!DOCTYPE html>
 <head>
     <title>Whatever</title>
     <meta name="viewport" content= "width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="src/css/tablesort.css">
+    <link rel="stylesheet" href="src/css/style.css">
 </head>
 
 <?php 
@@ -21,6 +20,7 @@ if(isset($_GET['message'])){
 
 $purchases = $mysqli->query("SELECT purchases.purchace_id AS purchaseId,
                                     products_final.product_name AS productName,
+                                    products_final.product_id AS productId,
                                     purchases.product_price AS productPrice,
                                     purchases.number_of_items AS munOfItems,
                                     purchases.price_per_item AS pricePerItem,
@@ -41,48 +41,66 @@ $purchases = $mysqli->query("SELECT purchases.purchace_id AS purchaseId,
 ?>
 
 <body>
-<h1 class= "hed">Purchases History</h1>
-    <div class = "tables">
-        <table class="table table-sortable">
-            <thead>
-                <tr>
-                    <th data-type = "number">Purchase ID</th>
-                    <th>Product Name</th>
-                    <th data-type = "number">Product Price</th>
-                    <th data-type = "date">Purchase Date</th>
-                    <th>Venue</th>
-                    <th data-type = "number">Quantity</th>
-                    <th data-type = "number">Value per Quantity</th>
-                    <th data-type = "number">Items Purchased</th>
-                    <th data-type = "number">Price Per Item</th>
-                    <th>Offer</th>
-                    <th>Product Tag</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                    while ($row = $purchases->fetch_assoc()) {
-/* TODO href problem!
-    NEED to pass id instead of name */
-                        echo '<tr>
-                                <td>'.$row["purchaseId"].'</td>
-                                <td><a href= "product_history.php?prod_id='.$row["productName"].'">'.$row["productName"].'</a></td>
-                                <td>'.$row["productPrice"].' &euro;</td>
-                                <td>'.$row["purchaseDate"].'</td>
-                                <td>'.$row["venueName"].'</td>
-                                <td>'.$row["productQuantity"].' '.$row["unitName"].'</td>
-                                <td>'.$row["pricePerQuantity"].' &euro; &#8725;'.' '.$row["unitName"].'</td>
-                                <td>'.$row["munOfItems"].'</td>
-                                <td>'.$row["pricePerItem"].' &euro; &#8725; item</td>
-                                <td>'.$row["offerName"].'</td>
-                                <td>'.$row["productTag"].'</td>
-                            </tr>';
-                            
-                    }
+    <div class="container">
         
-                ?>
-            </tbody>
-        </table>
+        <h1 class= "hed">
+            <span>
+                Purchases History
+            </span>
+        </h1>
+
+        <div class="custom-add-form">
+            <!-- TODO Incorporate Date Range picker-->
+            <form action="show_expences.php" method="post">
+                <label for="start_date">Start Date:</label>
+                <input type="date" name="start_date" id="start_date" required>
+                <label for="end_date">End Date:</label>
+                <input type="date" name="end_date" id="end_date" required>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <div class = "tables tables-grid">
+            <table class="table table-sortable test2">
+                <thead>
+                    <tr>
+                        <th data-type = "number">Purchase ID</th>
+                        <th>Product Name</th>
+                        <th data-type = "number">Product Price</th>
+                        <th data-type = "date">Purchase Date</th>
+                        <th>Venue</th>
+                        <th data-type = "number">Quantity</th>
+                        <th data-type = "number">Value per Quantity</th>
+                        <th data-type = "number">Items Purchased</th>
+                        <th data-type = "number">Price Per Item</th>
+                        <th>Offer</th>
+                        <th>Product Tag</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        while ($row = $purchases->fetch_assoc()) {
+
+                            echo '<tr>
+                                    <td>'.$row["purchaseId"].'</td>
+                                    <td><a href= "product_history.php?prod_id='.$row["productId"].'">'.$row["productName"].'</a></td>
+                                    <td>'.$row["productPrice"].' &euro;</td>
+                                    <td>'.$row["purchaseDate"].'</td>
+                                    <td>'.$row["venueName"].'</td>
+                                    <td>'.$row["productQuantity"].' '.$row["unitName"].'</td>
+                                    <td>'.$row["pricePerQuantity"].' &euro; &#8725;'.' '.$row["unitName"].'</td>
+                                    <td>'.$row["munOfItems"].'</td>
+                                    <td>'.$row["pricePerItem"].' &euro; &#8725; item</td>
+                                    <td>'.$row["offerName"].'</td>
+                                    <td>'.$row["productTag"].'</td>
+                                </tr>';
+                                
+                        }
+            
+                    ?>
+                </tbody>
+            </table>
+        </div>        
     </div>
     <script src="src/js/tablesort.js" defer></script>
 </body>

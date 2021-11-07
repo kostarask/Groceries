@@ -25,6 +25,7 @@
       <li class="active dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="show_product_categories">Show Data<span class="caret"></span></a>
         <ul class="dropdown-menu">
+          <li><a class="dropdown-options" href="show_expences.php">Expences</a></li>
           <li><a class="dropdown-options" href="show_purchases.php">Purchases</a></li>
           <li><a class="dropdown-options" href="show_products.php">Products</a></li>
           <li><a class="dropdown-options" href="show_product_categories.php">Categories</a></li>

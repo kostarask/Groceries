@@ -13,6 +13,9 @@ function min_price($prod_id){
         $min = $row2["pricePerItem"];
     }
         
+    if(!isset($min)){
+        return "n/a";
+    }
     return $min;
 }
 
@@ -28,6 +31,9 @@ function max_price($prod_id){
         $max = $row2["pricePerItem"];
     }
         
+    if(!isset($max)){
+        return "n/a";
+    }
     return $max;
 }
 
@@ -42,6 +48,10 @@ function avg_price($prod_id){
     
         $avg = number_format(round(floatval($row['avg']),2), 2, '.', '');
 
+
+    if(!isset($avg)){
+        return "n/a";
+    }
     return $avg;
 }
 
@@ -57,6 +67,10 @@ function max_price_per($prod_id){
         $max = $row2["price_per_qnt"];
     }
         
+    if(!isset($max)){
+        return "n/a";
+    }
+
     return $max;
 }
 
@@ -72,6 +86,10 @@ function min_price_per($prod_id){
         $min2 = $row2["price_per_qnt"];
     }
         
+    if(!isset($min2)){
+        return "n/a";
+    }
+
     return $min2;
 }
 
@@ -85,6 +103,10 @@ function avg_price_per($prod_id){
         $row = $result->fetch_assoc(); 
 
         $avg = $english_format_number = number_format(round(floatval($row['avg']),4), 4, '.', '');;
+
+    if(!isset($avg)){
+        return "n/a";
+    }
 
     return $avg;
 }
@@ -105,6 +127,10 @@ function venue_per_max($prod_id){
         $venue_max = $row2["venueName"];
     }
         
+    if(!isset($venue_max)){
+        return "n/a";
+    }
+
     return $venue_max;
 }
 
@@ -124,6 +150,10 @@ function venue_per_min($prod_id){
         $venue_min = $row2["venueName"];
     }
         
+    if(!isset($venue_min)){
+        return "n/a";
+    }
+
     return $venue_min;
 }
 
@@ -143,6 +173,10 @@ function venue_max($prod_id){
         $venue_max = $row2["venueName"];
     }
         
+    if(!isset($venue_max)){
+        return "n/a";
+    }
+
     return $venue_max;
 }
 
@@ -162,6 +196,11 @@ function venue_min($prod_id){
         $venue_min = $row2["venueName"];
     }
         
+    
+    if(!isset($venue_min)){
+        return "n/a";
+    }
+    
     return $venue_min;
 }
 

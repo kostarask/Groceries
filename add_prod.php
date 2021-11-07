@@ -70,11 +70,11 @@
 <fieldset class= "myForm">
 <legend>New Product:</legend>
 
-<!-- Inout new product name-->
+<!-- Input new product name-->
   <div class="form-group">
     <label class="col-md-4 control-label" for="product_name">New Product Name:</label>  
       <div class="col-md-4">
-        <input id="product_name" name="product_name" placeholder="Please enter name..." class="form-control input-md" required="" type="text" autocomplete=off>
+        <input id="product_name" name="product_name" placeholder="Please enter name..." class="form-control input-md" required type="text" autocomplete=off autofocus="on">
       </div>
   </div>
 

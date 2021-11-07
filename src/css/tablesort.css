@@ -27,7 +27,16 @@ th.th-sort-desc{
   margin-left: 25px;
   margin-right: 25px;
   overflow-y: auto;
-  height: 300px;
+  height: wrap;
+  max-height: 600px;
+ }
+
+ .two-columns {
+   margin-bottom: 0px;
+ }
+ 
+ .two-columns th {
+   width: 50%;
  }
 
  th{
@@ -36,14 +45,7 @@ th.th-sort-desc{
    top: 0;
    z-index: 10;
    background: rgb(197, 224, 247);
+   font-size:1.3em;
  }
 
- .hed{
-  font-size: 30px;
-  color: rgb(0, 0, 0);
-  text-transform: uppercase;
-  font-weight: 300;
-  text-align: center;
-  margin-bottom: 15px;
-  margin-top: 65px;
- }
+ 

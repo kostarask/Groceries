@@ -52,7 +52,7 @@
 
 <form class="form-horizontal" action="add_product_subtype.php" method="post" enctype="multipart/form-data">
 <fieldset class= "myForm">
-<legend>New Product Type</legend>
+<legend>New Product Subtype</legend>
 
 <!-- Inout new type name-->
     <div class="form-group">

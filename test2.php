@@ -1,102 +1,103 @@
-<?php 
-// include("includes/header.php");
-require("includes/db.php");
-include("includes/functions.php");
+<?php
 
-$prodName2='2';
-
-$chartInfo = $mysqli->query("SELECT purchases.price_per_item AS price, MONTH(purchases.date_of_purchase) AS monthOf
-                                FROM purchases
-                                WHERE purchases.product_id='$prodName2';");
-
-$pieResults = $mysqli->query("SELECT SUM(product_price) AS categoryExpenditure,
-                                     product_categories.category_name AS categoryName, 
-                                     product_types.product_type_name AS productTypeName, 
-                                     product_subtypes.product_subtype_name AS productSubtypeName, 
-                                     products_final.product_name AS productName, 
-                                     product_tags.product_tag_name AS productTag 
-                                FROM purchases,products_final,product_categories,product_types,product_subtypes,product_tags
-                                WHERE purchases.product_id=products_final.product_id
-                                AND products_final.product_subtype_id=product_subtypes.product_subtype_id
-                                AND product_subtypes.product_type_id=product_types.product_type_id
-                                AND product_types.category_id=product_categories.category_id
-                                AND products_final.product_tag_id=product_tags.product_tag_id
-                                GROUP BY products_final.product_name");
-
-$pieResults2 = $mysqli->query("SELECT SUM(product_price) AS categoryExpenditure,
-                                     product_categories.category_name AS categoryName, 
-                                     product_types.product_type_name AS productTypeName, 
-                                     product_subtypes.product_subtype_name AS productSubtypeName, 
-                                     products_final.product_name AS productName, 
-                                     product_tags.product_tag_name AS productTag 
-                                FROM purchases,products_final,product_categories,product_types,product_subtypes,product_tags
-                                WHERE purchases.product_id=products_final.product_id
-                                AND products_final.product_subtype_id='1'
-                                AND product_subtypes.product_type_id=product_types.product_type_id
-                                AND product_types.category_id=product_categories.category_id
-                                AND products_final.product_tag_id=product_tags.product_tag_id
-                                GROUP BY products_final.product_name");
+if(isset($_POST['date_range_picker'])){
+    echo $value = $_POST['date_range_picker'];
+    $dates =explode(" - ",$_POST['date_range_picker']);
+    
+}else{
+    $value="2021/01/01 - 2021/11/07";
+    $dates =explode(" - ",$value);
+}
+echo $value;
+echo '<br>';
+echo '<br>';
+echo $php_start_date = $dates[0];
+echo '<br>';
+echo $php_end_date=$dates[1];
+echo '<br>';
+echo '<br>';
+echo str_replace("/","-",$dates[1]);
 
 
 
- ?>
+
+?>
 
 <!DOCTYPE html>
+<head>
+    <title>Test</title>
+        <meta name="viewport" content= "width=device-width, initial-scale=1.0">
+        <meta charset="utf-8">
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+</head>
 
-<html>
-  <head>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-      google.charts.setOnLoadCallback(drawChart2);
+<body>
+    
+    <form action="test2.php" method="post">
 
-      function drawChart() {
+                <label for="date_range_picker">Start Date:</label>
+                <input type="text" name="date_range_picker" id="date_range_picker" ">
+                
 
-        var data = google.visualization.arrayToDataTable([
-            ['Task', 'Hours per Day'],
-            <?php while($row = $pieResults->fetch_assoc()){
-                echo "['".$row['productName']."', ".$row['categoryExpenditure']."],";
-                }
-            ?>
-        ]);
+               
 
-        var options = {
-          title: 'Total per Product',
-          is3D: true,
-        };
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                <button type="submit">Submit</button>
+            </form>
 
-        chart.draw(data, options);
-      }
-
-      function drawChart2() {
-
-        var data2 = google.visualization.arrayToDataTable([
-          ['Year', 'Purchases'],          
-            <?php while($row2 = $chartInfo->fetch_assoc()){
-              echo "['".$row2['monthOf']."', ".floatval($row2['price'])."],";
-              }
-            ?>
-
-        ]);
-
-        var options = {
-          title: 'Company Performance',
-          curveType: 'function',
-          legend: { position: 'bottom' }
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById('piechart2'));
-
-        chart.draw(data2, options);
-        }
-      
-    </script>
-  </head>
-  <body>
-  
-    <div id="piechart" style="width: 900px; height: 500px;"></div>
-    <div id="piechart2" style="width: 900px; height: 500px;"></div>
-  </body>
-</html>
+</body>
+                <script>
+                    var js_start_date= '<?php echo $php_start_date;?>';
+                    var js_end_date= '<?php echo $php_end_date;?>';
+                    $('input[name="date_range_picker"]').daterangepicker({
+                        "showDropdowns": true,
+                        ranges: {
+                            'Today': [moment(), moment()],
+                            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                            'This Month': [moment().startOf('month'), moment().endOf('month')],
+                            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                        },
+                        "locale": {
+                            "format": "YYYY/MM/DD",
+                            "separator": " - ",
+                            "applyLabel": "Apply",
+                            "cancelLabel": "Cancel",
+                            "fromLabel": "From",
+                            "toLabel": "To",
+                            "customRangeLabel": "Custom",
+                            "weekLabel": "W",
+                            "daysOfWeek": [
+                                "Su",
+                                "Mo",
+                                "Tu",
+                                "We",
+                                "Th",
+                                "Fr",
+                                "Sa"
+                            ],
+                            "monthNames": [
+                                "January",
+                                "February",
+                                "March",
+                                "April",
+                                "May",
+                                "June",
+                                "July",
+                                "August",
+                                "September",
+                                "October",
+                                "November",
+                                "December"
+                            ],
+                            "firstDay": 1
+                        },
+                        "startDate": js_start_date,
+                        "endDate": js_end_date
+                    }, function(start, end, label) {
+                    console.log('New date range selected: ' + start.format('YYYY/MM/DD') + ' to ' + end.format('YYYY/MM/DD') + ' (predefined range: ' + label + ')');
+                    });
+                </script>

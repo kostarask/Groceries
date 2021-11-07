@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <div class="form-group">
     <label class="col-md-4 control-label" for="product_name">Date of Purchase:</label>  
     <div class="col-md-4">
-      <input type= "date" id="date_of_purchase" name="date_of_purchase" placeholder="DATE" class="form-control input-md" required="" type="text">
+      <input type= "date" id="date_of_purchase" name="date_of_purchase" placeholder="DATE" class="form-control input-md" required type="text">
       
     </div>
   </div>

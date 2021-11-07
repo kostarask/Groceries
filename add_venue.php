@@ -47,7 +47,7 @@ insertEntryToDatabase();
 
 <form class="form-horizontal" action="add_venue.php" method="post" enctype="multipart/form-data">
 <fieldset class= "myForm">
-<legend>New Category</legend>
+<legend>New Venue</legend>
 
 <!-- Text input-->
     <div class="form-group">
