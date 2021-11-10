@@ -5,7 +5,7 @@ include("includes/functions.php");
 
 
 if(!isset($_GET['productName'])){
-  header("location: select_product.php?message=Please select a product...");
+  header("location: select_product.php");
 }
 // Query to get product id from database
 $productName = $_GET['productName'];

@@ -10,6 +10,10 @@
 	--backgroundColor: hsl(359, 46%, 58%);
 }
 
+.navbar-inverse .navbar-brand,
+.navbar-inverse .navbar-nav>li>a{
+	color: var(--backTextColor);
+}
 
 .navbar .navbar-nav > li.open > a:hover,
 .navbar .navbar-nav > li.open > a:focus {
@@ -466,4 +470,14 @@ form.form-horizontal.custom-form{
 	padding-top: 0;
 
 	border-radius: 20px;
+}
+
+.form-control{
+	background-color: var(--tableBackgroundColor);
+}
+
+input.form-control,
+select.form-control{
+	font-weight: bold;
+	font-size: 1.5rem;
 }

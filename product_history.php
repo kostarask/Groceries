@@ -3,6 +3,17 @@ include("includes/header.php");
 require("includes/db.php");
 include("includes/functions.php");
 
+if(isset($_GET['productName'])){
+
+  $tempProdName = $_GET['productName'];
+
+  $getProdId= $mysqli->query("SELECT product_id FROM `products_final` WHERE product_name ='$tempProdName'");
+  while ($row5 = $getProdId->fetch_assoc()) {
+
+    $_GET['prod_id'] = $row5['product_id'];
+  }
+
+}
 if(isset($_GET['prod_id'])){
 
 $prodId =$_GET['prod_id'];

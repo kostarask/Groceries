@@ -1,3 +1,21 @@
+<?php
+require("includes/db.php");
+// include("includes/functions.php");
+
+//Query that gets all data from products table
+$products = $mysqli->query("SELECT products_final.product_name AS productName, 
+                                   product_subtypes.product_subtype_name AS productSubtype,
+                                   product_types.product_type_name AS productType,
+                                   product_categories.category_name AS productCategory,
+                                   product_units.product_unit_name AS productUnits,
+                                   product_tags.product_tag_name AS productTag
+                             FROM products_final,product_subtypes,product_types,product_categories,product_units,product_tags
+                             WHERE products_final.product_subtype_id=product_subtypes.product_subtype_id
+                             AND product_subtypes.product_type_id=product_types.product_type_id
+                             AND product_types.category_id=product_categories.category_id
+                             AND products_final.product_unit_id=product_units.product_unit_id
+                             AND products_final.product_tag_id=product_tags.product_tag_id");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,6 +62,21 @@
       </li>
       
     </ul>
+    <form class="navbar-form navbar-right" action="search.php" method="post" enctype="multipart/form-data">
+      <input list = "products" id="product_name" name="product_name" placeholder="Search for product..." class="form-control" required autocomplete="off" type="text">
+      <datalist id="products">
+          <optgroup label= "Products">
+          <?php
+
+            while($row = $products -> fetch_assoc()){
+                echo '<option value = "'.$row["productName"].'">'.$row["productSubtype"].', '.$row["productType"].', '.$row["productCategory"].', '.$row["productTag"].'</option>';
+            }
+
+          ?>
+          </optgroup>
+      </datalist>
+      <button type="submit" class="btn btn-primary">Search</button>
+    </form>
   </div>
 </nav>
 
