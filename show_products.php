@@ -38,29 +38,29 @@ include("includes/functions.php");
       </span>
     </h1>
 
-    <div class="custom-add-form">
-      <form action="add_prod.php" method="get">
-          <button type="submit">Add New Product</button>
+    <div class="custom-add-form" style="">
+      <form action="add_prod.php" method="post">
+          <button type="submit" class="btn btn-primary">Add New Product</button>
       </form>
     </div>
 
     <div class = "tables tables-grid">
-      <table class= "table table-sortable test2">
+      <table class= "table table-sortable sticky-table row-highlighter test2">
         <thead>
             <tr>
-                <th data-type = "number">Product ID</th>
-                <th>Product Name</th>
-                <th>Product Unit</th>
-                <th>Product Subtype</th>
-                <th>Product Type</th>
-                <th>Product Category</th>
-                <th>Product Tag</th>
-                <th data-type = "number">Highest Price</th>
-                <th data-type = "number">Lowest Price</th>
-                <th data-type = "number">Average Price</th>
-                <th data-type = "number">Highest Price per QNT</th>
-                <th data-type = "number">Lowest Price per QNT</th>
-                <th data-type = "number">Average Price per QNT</th>
+                <th class="pre-sort" data-type = "number">Product ID</th>
+                <th class="pre-sort">Product Name</th>
+                <th class="pre-sort">Product Unit</th>
+                <th class="pre-sort">Product Subtype</th>
+                <th class="pre-sort">Product Type</th>
+                <th class="pre-sort">Product Category</th>
+                <th class="pre-sort">Product Tag</th>
+                <th class="pre-sort" data-type = "number">Highest Price</th>
+                <th class="pre-sort" data-type = "number">Lowest Price</th>
+                <th class="pre-sort" data-type = "number">Average Price</th>
+                <th class="pre-sort" data-type = "number">Highest Price per QNT</th>
+                <th class="pre-sort" data-type = "number">Lowest Price per QNT</th>
+                <th class="pre-sort" data-type = "number">Average Price per QNT</th>
             </tr>
           </thead>
 

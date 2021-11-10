@@ -30,17 +30,17 @@ $categories = $mysqli->query("SELECT * FROM product_categories");
         </h1>
 
     <div class="custom-add-form">
-      <form action="add_product_category.php" method="get">
-          <button type="submit">Add New Category</button>
+      <form action="add_product_category.php" method="post">
+          <button type="submit" class="btn btn-primary">Add New Category</button>
       </form>
     </div>
 
         <div class = "tables tables-grid">
-            <table class="table table-sortable two-columns">
+            <table class="table table-sortable sticky-table row-highlighter two-columns">
                 <thead>
                     <tr>
-                        <th data-type = "number">Category ID</th>
-                        <th>Category Name</th>
+                        <th class="pre-sort" data-type = "number">Category ID</th>
+                        <th class="pre-sort">Category Name</th>
                     </tr>
                 </thead>
                 <tbody>

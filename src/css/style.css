@@ -1,11 +1,53 @@
 :root{
-	--tableColor: #a5cef1;
+	--tableBackgroundColor: hsl(200, 22%, 75%);
 	--tableColor2: #1362a7;
 	--tableColorHover: #B4D7F7;
+	--headerPrimaryColor: hsl(208, 33%, 26%);
+	--buttonPrimaryColor: hsl(208, 27%, 18%);
+	--buttonHoverColor: hsl(180, 100%, 25%);
+	--tdPrimaryColor: hsl(206, 9%, 85%);
+	--backTextColor: hsl(0, 0%, 70%);
+	--backgroundColor: hsl(359, 46%, 58%);
+}
+
+
+.navbar .navbar-nav > li.open > a:hover,
+.navbar .navbar-nav > li.open > a:focus {
+	background-color: var(--buttonHoverColor);
+	color: #fff;
+}
+
+.dropdown .dropdown-menu a:hover{
+	background-color: var(--buttonHoverColor); 
+	text-decoration: none;
+}
+
+.container-fluid{
+	background-color: var(--headerPrimaryColor);
+}
+
+ul.dropdown-menu{
+	background-color: var(--headerPrimaryColor);
+}
+
+.navbar-nav > a > .dropdown-options:hover { 
+	background-color: var(--buttonHoverColor);
 }
 
 body{
-	background-color: #d5f7ff;
+	background-color: var(--backgroundColor);
+	font-family: 'Open Sans', Times, serif;
+	font-size: 16px;
+	display: flex;
+	justify-content: center;
+}
+
+.scrollable-element {
+	scrollbar-color: dark;
+  }
+
+a{
+	color:var(--headerPrimaryColor);
 }
 
 th.lala{
@@ -67,7 +109,6 @@ th.lala{
 
 
 .input_text{
-	font-family:Arial, Helvetica, sans-serif;
 	font-size:14px;
 	border:1px solid #84a10b;
 	padding:2px;
@@ -87,20 +128,30 @@ th.lala{
 }
 
 .hed{
-	font-size: 30px;
-	color: rgb(0, 0, 0);
+	font-size: 4rem;
+	color: var(--backTextColor);
 	font-weight: 300;
 	text-align: center;
 }
 
 .hed span{
 	padding: 8px;
-	background-color: var(--tableColor);
+	padding-left: 10px;
+	padding-right: 10px;
+	color: var(--backTextColor);
+	background-color: var(--headerPrimaryColor);
+	font-weight: unset;
+	border-radius: 10px;
 }
 
 .table-sortable th{
 	cursor: pointer;
 	user-select: none;
+	border: unset;
+}
+
+.pre-sort{
+	padding-right: 25.39px !important;
 }
 
 .table-sortable tr:hover{
@@ -122,41 +173,100 @@ th.th-sort-desc::after{
 
 th.th-sort-asc,
 th.th-sort-desc{
-	background: rgb(180, 215, 247);
+	background: var(--buttonPrimaryColor);
 }
 
 .tables {
 	overflow-y: auto;
 	overflow-x: auto;
-	height: wrap;
-	width: wrap;
 	/* max-height: 600px; */
 	min-width: 50vw;
+	border-collapse: separate;
 }
 
+.table>thead>tr>th {
+	border: unset;
+}
+
+
 th{
+
+	background: var(--headerPrimaryColor);
+	color: var(--backTextColor);
+	border: 1px solid var(--headerPrimaryColor);
+	scrollbar-color: var(--headerPrimaryColor);
+
+	font-size:1.3em;
+	font-weight: unset;
+	white-space: nowrap;
+
+	border: unset;
+}
+
+.sticky-table th{
 	text-align: left;
 	position: sticky;
 	top: 0;
 	z-index: 10;
-	background: var(--tableColor);
-	font-size:1.3em;
-	white-space: nowrap;
+}
+
+.sticky-table thead th:first-child {
+	position: sticky;
+	left: 0;
+	z-index: 11;
+}
+
+.sticky-table tbody td:first-child {
+	position: sticky;
+	left: 0;
+	z-index: 10;
+}
+
+.sticky-table thead th:nth-child(2) {
+	position: sticky;
+	left: 0;
+	z-index: 11;
+}
+
+.sticky-table tbody td:nth-child(2) {
+	position: sticky;
+	left: 0;
+	z-index: 10;
 }
 
 .table tbody tr td{
-	border: 1px solid var(--tableColor);
+	border: 3px solid var(--headerPrimaryColor);
+	background-color: white;
+	color: black;
+}
+
+.row-highlighter tbody tr:hover{
+	border: 3px solid var(--headerPrimaryColor);
+	background-color: var(--tableBackgroundColor) !important;
+	color: black;
+}
+
+.row-highlighter tbody tr:hover td{
+	background: transparent;
+	color: black;
+}
+
+.row-highlighter tbody tr:hover a{
+	background: transparent;
+	color: black;
 }
 
 .container{
-	width: 100vw;
+	width: 80vw;
 	height: 100vh;
+	justify-content: center;
 
 	display: grid;
 
-	grid-template-columns: 1fr minmax(auto, auto) 1fr;
+	grid-template-columns:  minmax(auto, auto) ;
 	grid-template-rows: max-content max-content minmax(auto, auto) max-content 1fr;
 
+	scrollbar-track-color: violet;
 	gap: 5px;
 
 	padding:10px;
@@ -177,7 +287,13 @@ th{
 .date-picker-form{
 
     padding: 10px;
-	background-color: var(--tableColor);
+
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	
+	background-color: var(--headerPrimaryColor);
+	color: var(--backTextColor);
+
     grid-column-start: 2;
     grid-column-end: 3;
 
@@ -192,7 +308,12 @@ th{
 .custom-add-form{
 
     padding: 10px;
-	background-color: var(--tableColor);
+	background-color: var(--headerPrimaryColor);
+	color: var(--backTextColor);
+
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+
     grid-column-start: 2;
     grid-column-end: 3;
 
@@ -204,19 +325,39 @@ th{
     display: block;
 }
 
+.custom-input-field{
+
+	border-radius: 4px;
+	color: black;
+}
+
+.btn-primary{
+	background-color: var(--buttonPrimaryColor);
+	border-color: var(--buttonPrimaryColor);
+	color: var(--backTextColor);
+}
+
+.btn-primary:hover{
+	background-color: var(--buttonHoverColor);
+	border-color: var(--buttonHoverColor);
+}
+
 .chart-grid{
 
     padding: 10px;
-	background-color: var(--tableColor);
+	background-color: var(--headerPrimaryColor);
     grid-column-start: 2;
     grid-column-end: 3;
 
     grid-row-start: 5;
     grid-row-end: 6;
 
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+
     height: 20rem;
 
-    display: block;
+    
 }
 
 .tables-grid{
@@ -227,6 +368,15 @@ th{
     grid-row-end: 4;
 
     margin: 0;
+
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	border-color: var(--headerPrimaryColor);
+
+	padding-left: 10px;
+	padding-right: 10px;
+
+	background-color: var(--headerPrimaryColor);
 	
 }
 
@@ -243,6 +393,7 @@ th{
 
 .table-sortable{
     margin:0;
+	border-collapse: separate;
 }
 
 .test2{
@@ -258,4 +409,61 @@ th{
 
 .table{
     overflow-x: auto;    
+	overflow-y: auto;
+	scrollbar-color: var(--headerPrimaryColor);
+}
+
+* {
+	scrollbar-width: 12px;/*thin;*/
+	scrollbar-color: skyblue #000066;
+}
+
+*::-webkit-scrollbar {
+width: 8px;
+height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+background: hsl(212, 22%, 67%);        /* color of the tracking area */
+border-radius: 4px;
+}
+
+*::-webkit-scrollbar-thumb {
+background-color: var(--headerPrimaryColor);    /* color of the scroll thumb */
+border-radius: 4px;       /* roundness of the scroll thumb */
+border: 1px solid var(--headerPrimaryColor); /* creates padding around scroll thumb */
+}
+
+*::-webkit-scrollbar-corner{
+	background: hsl(359, 46%, 58%); 
+}
+
+.daterangepicker{
+	background-color: var(--tableBackgroundColor);
+}
+
+.daterangepicker .calendar-table{
+	background-color: var(--tableBackgroundColor);
+}
+
+legend{
+	padding-left: 50px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width:100%;
+	font-size: 3rem;
+	color: var(--backTextColor);
+	white-space: nowrap;
+	border-bottom-color: var(--backTextColor);
+}
+
+form.form-horizontal.custom-form{
+	width:60vw;
+	background-color: var(--headerPrimaryColor);
+	color: var(--backTextColor);
+
+	margin-top: 70px;
+	padding-top: 0;
+
+	border-radius: 20px;
 }

@@ -19,17 +19,14 @@
 
     }else{
 
-        $initialDateRange="2021/01/01 - 2021/11/07";
-        $datesArray =explode(" - ",$initialDateRange);
-
-        $php_start_date = $datesArray[0];
-        $php_end_date=$datesArray[1];
+        $php_start_date = date('Y/m/d', strtotime("2019-01-01"));
+        $php_end_date=date('Y/m/d');
         
-        $startDateDb = str_replace("/","-",$datesArray[0]);
-        $endDateDb = str_replace("/","-",$datesArray[1]);
+        $startDate = date( 'd/m/Y', strtotime( $php_start_date ) );
+        $startDateDb = str_replace("/","-",$php_start_date);
         
-        $startDate = date( 'd/m/Y', strtotime( $datesArray[0] ) );
-        $endDate = date( 'd/m/Y', strtotime( $datesArray[1] ) );
+        $endDate = date('d/m/Y');
+        $endDateDb = str_replace("/","-",$php_end_date);
 
     }
 
@@ -151,15 +148,15 @@
         <div class="chart-grid" id="piechart"></div>
 
 		<div class="date-picker-form">
-            <!-- TODO Incorporate Date Range picker-->
+            
             <form action="show_expences.php" method="post">
 
                 <label for="date_range_picker">Date Range:</label>
-                <input type="text" name="date_range_picker" id="date_range_picker"> 
+                <input class="custom-input-field" type="text" name="date_range_picker" id="date_range_picker"> 
 
                 <label for="group_by_variable">Order By:</label>
-                <select id="group_by_variable" name="group_by_variable" >
-                <option value="<?php echo $groupByVariable?>" selected hidden><?php echo $groupByVariableName?></option>
+                <select class="custom-input-field" id="group_by_variable" name="group_by_variable" >
+                    <option value="<?php echo $groupByVariable?>" selected hidden><?php echo $groupByVariableName?></option>
                     <option value="productCategoryName">Product Category</option>
                     <option value="productTypeName">Product Type</option>
                     <option value="productSubtypeName">Product Subtype</option>
@@ -167,12 +164,13 @@
                     <option value="venueName">Venue</option>
                 </select>
 
-                <button class ="btn btn-default" type="submit">Submit</button>
+                <button class ="btn btn-primary" type="submit">Submit</button>
             </form>
         </div>
     
-		<div class = "tables tables-grid hidden-x-scroll">
-            <table class="table table-sortable two-columns test2">
+		<div class = "tables tables-grid hidden-x-scroll " style="border-top-left-radius: 0px;
+	border-top-right-radius: 0px;">
+            <table class="table table-sortable row-highlighter sticky-table two-columns test2">
                 <thead>
                     <tr>
                         <th><?php echo $groupByVariableName?></th>

@@ -30,17 +30,17 @@ $categories = $mysqli->query("SELECT * FROM venues");
         </h1>
 
         <div class="custom-add-form">
-            <form action="add_venue.php" method="get">
-                <button type="submit">Add New Venue</button>
+            <form action="add_venue.php" method="post">
+                <button type="submit" class="btn btn-primary">Add New Venue</button>
             </form>
         </div>
 
         <div class = "tables tables-grid">
-            <table class="table table-sortable two-columns">
+            <table class="table table-sortable sticky-table row-highlighter two-columns">
                 <thead>
                     <tr>
-                        <th data-type = "number">Venue ID</th>
-                        <th>Venue Name</th>
+                        <th class="pre-sort" data-type = "number">Venue ID</th>
+                        <th class="pre-sort">Venue Name</th>
                     </tr>
                 </thead>
                 <tbody>

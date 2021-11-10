@@ -71,16 +71,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<link rel="stylesheet" type="text/css" href="src/css/style.css" />
 <link rel="stylesheet" type="text/css" href="src/css/navbar.css" />
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="src/js/jquery-1.4.2.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="src/css/style.css" />
 <!------ Include the above in your HEAD tag ---------->
 
-<form class="form-horizontal" action="add_purchase.php" method="post" enctype="multipart/form-data">
+<form class="form-horizontal custom-form" action="add_purchase.php" method="post" enctype="multipart/form-data">
 <fieldset class= "myForm">
-<legend>New Purchase of <b><u><?php echo $productName?></u></b>:</legend>
+<legend >New Purchase of: <b><u><?php echo $productName?></u></b></legend>
   <!-- Enter Date -->
   <div class="form-group">
     <label class="col-md-4 control-label" for="product_name">Date of Purchase:</label>  
@@ -121,9 +121,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   
     <!-- Enter Quantity of items -->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="num_of_items">Quantity of items:</label>  
+      <label class="col-md-4 control-label" for="num_of_items">Number of Products:</label>  
       <div class="col-md-4">
-      <input type="number" min="1"  id="num_of_items" name="num_of_items" placeholder="Please enter the quantity of items..." class="form-control input-md" required  autocomplete= "off">
+      <input type="number" min="1"  id="num_of_items" name="num_of_items" placeholder="Please enter the number of products..." class="form-control input-md" required  autocomplete= "off">
   
       </div>
     </div>

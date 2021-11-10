@@ -34,14 +34,14 @@ $products = $mysqli->query("SELECT products_final.product_name AS productName,
 ?>
 
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<link rel="stylesheet" type="text/css" href="src/css/style.css" />
 <link rel="stylesheet" type="text/css" href="src/css/navbar.css" />
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="src/js/jquery-1.4.2.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="src/css/style.css" />
 <!------ Include the above in your HEAD tag ---------->
 
-<form class="form-horizontal" action="select_product.php" method="post" enctype="multipart/form-data">
+<form class="form-horizontal custom-form" action="select_product.php" method="post" enctype="multipart/form-data">
 <fieldset class= "myForm">
 <legend>Select Product:</legend>
 
@@ -70,7 +70,7 @@ $products = $mysqli->query("SELECT products_final.product_name AS productName,
   <div class="col-md-4">
     <input type="submit" value="Continue to Purchase" name="modify" class="btn btn-block btn-primary" />
   </div>
-  </div>
+</div>
 
 </fieldset>
 </form>

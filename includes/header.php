@@ -22,7 +22,7 @@
       <li class="active"><a href="show_products.php">Products</a></li>
       <li class="active"><a href="show_product_categories.php">Categories</a></li>
       <li class="active"><a href="show_product_types.php">Product Types</a></li>-->
-      <li class="active dropdown">
+      <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="show_product_categories">Show Data<span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a class="dropdown-options" href="show_expences.php">Expences</a></li>
@@ -35,7 +35,7 @@
           <li><a class="dropdown-options" href="show_offers.php">Offers</a></li>          
         </ul>
       </li>
-      <li class="active dropdown">
+      <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Log New Data<span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a class="dropdown-options" href="add_purchase.php">Log Purchase</a></li>
@@ -51,7 +51,6 @@
     </ul>
   </div>
 </nav>
-  
 
 </body>
 </html>

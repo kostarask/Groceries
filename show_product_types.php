@@ -35,18 +35,18 @@ $categories = $mysqli->query(" SELECT product_types.product_type_id AS productID
         </h1>
 
         <div class="custom-add-form">
-            <form action="add_product_type.php" method="get">
-                <button type="submit">Add New Product Type</button>
+            <form action="add_product_type.php" method="post">
+                <button type="submit" class="btn btn-primary">Add New Product Type</button>
             </form>
         </div>
 
         <div class = "tables tables-grid">
-            <table class="table table-sortable test2">
+            <table class="table table-sortable sticky-table row-highlighter test2">
                 <thead>
                     <tr>
-                        <th data-type = "number">Product Type ID</th>
-                        <th>Product Type Name</th>
-                        <th>Product Type Category</th>
+                        <th class="pre-sort" data-type = "number">Product Type ID</th>
+                        <th class="pre-sort">Product Type Name</th>
+                        <th class="pre-sort">Product Type Category</th>
                     </tr>
                 </thead>
                 <tbody>

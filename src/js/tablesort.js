@@ -36,6 +36,8 @@ function sortTableByColumn(table, column, asc = true){
 
     //Remember how the collumn is currently sorted
     table.querySelectorAll("th").forEach(th => th.classList.remove("th-sort-asc", "th-sort-desc"));
+    table.querySelectorAll("th").forEach(th => th.classList.add("pre-sort"));
+    table.querySelector(`th:nth-child(${ column + 1 })`).classList.remove("pre-sort");
     table.querySelector(`th:nth-child(${ column + 1 })`).classList.toggle("th-sort-asc", asc);
     table.querySelector(`th:nth-child(${ column + 1 })`).classList.toggle("th-sort-desc", !asc);
 }

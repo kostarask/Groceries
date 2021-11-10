@@ -45,7 +45,7 @@ insertEntryToDatabase();
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
-<form class="form-horizontal" action="add_venue.php" method="post" enctype="multipart/form-data">
+<form class="form-horizontal custom-form" action="add_venue.php" method="post" enctype="multipart/form-data">
 <fieldset class= "myForm">
 <legend>New Venue</legend>
 

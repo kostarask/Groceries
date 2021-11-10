@@ -31,17 +31,17 @@ $offers = $mysqli->query("SELECT * FROM offers");
         </h1>
 
         <div class="custom-add-form">
-            <form action="add_offer.php" method="get">
-                <button type="submit">Add New Offer</button>
+            <form action="add_offer.php" method="post">
+                <button type="submit" class="btn btn-primary">Add New Offer</button>
             </form>
         </div>
 
         <div class = "tables tables-grid">
-            <table class="table table-sortable two-columns">
+            <table class="table table-sortable sticky-table row-highlighter two-columns">
                 <thead>
                     <tr>
-                        <th data-type = "number">Offer ID</th>
-                        <th>Offer Name</th>
+                        <th class="pre-sort" data-type = "number">Offer ID</th>
+                        <th class="pre-sort">Offer Name</th>
                     </tr>
                 </thead>
                 <tbody>

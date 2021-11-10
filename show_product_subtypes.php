@@ -34,19 +34,19 @@ $categories = $mysqli->query(" SELECT product_subtypes.product_subtype_id AS pro
         </h1>
 
     <div class="custom-add-form">
-        <form action="add_product_subtype.php" method="get">
-            <button type="submit">Add New Product Subtype</button>
+        <form action="add_product_subtype.php" method="post">
+            <button type="submit" class="btn btn-primary">Add New Product Subtype</button>
         </form>
     </div>
 
 
         <div class = "tables tables-grid">
-            <table class="table table-sortable">
+            <table class="table table-sortable sticky-table row-highlighter">
                 <thead>
                     <tr>
-                        <th data-type = "number">Product Subtype ID</th>
-                        <th>Product Subtype Name</th>
-                        <th>Product Type</th>
+                        <th class="pre-sort" data-type = "number">Product Subtype ID</th>
+                        <th class="pre-sort">Product Subtype Name</th>
+                        <th class="pre-sort">Product Type</th>
                     </tr>
                 </thead>
                 <tbody>
