@@ -15,17 +15,12 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="show_purchases.php">Groceries</a>
+      <a class="navbar-brand" href="show_expences.php">Expences</a>
     </div>
     <ul class="nav navbar-nav">
-      <!--<li class="active"><a href="show_purchases.php">Purchases</a></li>
-      <li class="active"><a href="show_products.php">Products</a></li>
-      <li class="active"><a href="show_product_categories.php">Categories</a></li>
-      <li class="active"><a href="show_product_types.php">Product Types</a></li>-->
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="show_product_categories">Show Data<span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-options" href="show_expences.php">Expences</a></li>
           <li><a class="dropdown-options" href="show_purchases.php">Purchases</a></li>
           <li><a class="dropdown-options" href="show_products.php">Products</a></li>
           <li><a class="dropdown-options" href="show_product_categories.php">Categories</a></li>
