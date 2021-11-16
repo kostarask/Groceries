@@ -2,12 +2,13 @@
 include("includes/header.php");
 require("includes/db.php");
 include("includes/functions.php");
+include("includes/dbQueries.php");
 
 if (isset($_GET['message'])) {
     popMessage($_GET['message']);
 }
 
-$categories = $mysqli->query("SELECT * FROM product_categories");
+$categories = queryAll("product_categories");;
 ?>
 <!DOCTYPE html>
 

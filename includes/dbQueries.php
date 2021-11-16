@@ -1,6 +1,15 @@
 <?php
 include('db.php');
 
+// Function that returns all from given tableName
+function queryAll($tableName) {
+
+    global $mysqli;
+    $results = $mysqli->query("SELECT * FROM $tableName");
+
+    return $results;
+}
+
 //Function that returns array with query results for show_expenses page
 function showExpensesQuery($startDateDb, $endDateDb, $groupByVariable) {
 

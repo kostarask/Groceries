@@ -2,12 +2,13 @@
 include("includes/header.php");
 require("includes/db.php");
 include("includes/functions.php");
+include("includes/dbQueries.php");
 
 if (isset($_GET['message'])) {
     popMessage($_GET['message']);
 }
 
-$venues = $mysqli->query("SELECT * FROM venues");
+$venues = queryAll("venues");
 ?>
 
 <!DOCTYPE html>
