@@ -33,3 +33,33 @@ function showExpensesQuery($startDateDb, $endDateDb, $groupByVariable) {
 
     return $results;
 }
+
+//Function that returns array with query results for show_subtypes page
+function showSubtypesQuery() {
+
+    global $mysqli;
+    $results = $mysqli->query(
+        "SELECT product_subtypes.product_subtype_id AS productSubtypeID,
+                product_subtypes.product_subtype_name AS productSubTypeName, 
+                product_types.product_type_name AS productTypeName
+        FROM product_subtypes 
+        LEFT JOIN product_types ON product_subtypes.product_type_id = product_types.product_type_id"
+    );
+
+    return $results;
+}
+
+//Function that returns array with query results for show_types page
+function showTypesQuery() {
+
+    global $mysqli;
+    $results = $mysqli->query(
+        "SELECT product_types.product_type_id AS productID,
+                product_types.product_type_name AS productTypeName, 
+                product_categories.category_name AS categoryName
+        FROM product_types 
+        LEFT JOIN product_categories ON product_types.category_id = product_categories.category_id"
+    );
+
+    return $results;
+}

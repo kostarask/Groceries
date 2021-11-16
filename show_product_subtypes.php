@@ -2,16 +2,13 @@
 include("includes/header.php");
 require("includes/db.php");
 include("includes/functions.php");
+include("includes/dbQueries.php");
 
 if (isset($_GET['message'])) {
     popMessage($_GET['message']);
 }
 
-$categories = $mysqli->query(" SELECT product_subtypes.product_subtype_id AS productSubtypeID,
-                                        product_subtypes.product_subtype_name AS productSubTypeName, 
-                                        product_types.product_type_name AS productTypeName
-                                FROM product_subtypes 
-                                LEFT JOIN product_types ON product_subtypes.product_type_id = product_types.product_type_id");
+$subtypes = showSubtypesQuery();
 
 ?>
 <!DOCTYPE html>
@@ -54,7 +51,7 @@ $categories = $mysqli->query(" SELECT product_subtypes.product_subtype_id AS pro
                 </thead>
                 <tbody>
                     <?php
-                    while ($row = $categories->fetch_assoc()) {
+                    while ($row = $subtypes->fetch_assoc()) {
                         echo '
                                 <tr>
                                     <td>' . $row["productSubtypeID"] . '</td>

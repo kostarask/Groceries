@@ -2,16 +2,13 @@
 include("includes/header.php");
 require("includes/db.php");
 include("includes/functions.php");
+include("includes/dbQueries.php");
 
 if (isset($_GET['message'])) {
     popMessage($_GET['message']);
 }
 
-$categories = $mysqli->query(" SELECT product_types.product_type_id AS productID,
-                                        product_types.product_type_name AS productTypeName, 
-                                        product_categories.category_name AS categoryName
-                                FROM product_types 
-                                LEFT JOIN product_categories ON product_types.category_id = product_categories.category_id");
+$types = showTypesQuery();
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +46,7 @@ $categories = $mysqli->query(" SELECT product_types.product_type_id AS productID
                 </thead>
                 <tbody>
                     <?php
-                    while ($row = $categories->fetch_assoc()) {
+                    while ($row = $types->fetch_assoc()) {
 
                         echo '
                                 <tr>
