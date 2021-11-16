@@ -2,7 +2,19 @@
 include("includes/header.php");
 require("includes/db.php");
 include("includes/functions.php");
+include("includes/dbQueries.php");
 
+//Create initial starting and ending date
+$php_start_date = date('Y/m/d', strtotime("2019-01-01"));
+$php_end_date = date('Y/m/d');
+
+$startDate = date('d/m/Y', strtotime($php_start_date));
+$startDateDb = str_replace("/", "-", $php_start_date);
+
+$endDate = date('d/m/Y');
+$endDateDb = str_replace("/", "-", $php_end_date);
+
+// Update starting and ending dates when selected in form
 if (isset($_POST['date_range_picker'])) {
 
     $initialDateRange = $_POST['date_range_picker'];
@@ -16,24 +28,15 @@ if (isset($_POST['date_range_picker'])) {
 
     $startDate = date('d/m/Y', strtotime($datesArray[0]));
     $endDate = date('d/m/Y', strtotime($datesArray[1]));
-} else {
-
-    $php_start_date = date('Y/m/d', strtotime("2019-01-01"));
-    $php_end_date = date('Y/m/d');
-
-    $startDate = date('d/m/Y', strtotime($php_start_date));
-    $startDateDb = str_replace("/", "-", $php_start_date);
-
-    $endDate = date('d/m/Y');
-    $endDateDb = str_replace("/", "-", $php_end_date);
 }
 
+// Initial way of grouping expenses
+$groupByVariable = 'productCategoryName';
+
+// Update table according to choice of parameter for grouping from form
 if (isset($_POST['group_by_variable'])) {
 
     $groupByVariable = $_POST['group_by_variable'];
-} else {
-
-    $groupByVariable = 'productCategoryName';
 }
 
 switch ($groupByVariable) {
@@ -57,23 +60,8 @@ switch ($groupByVariable) {
 if (isset($_GET['message'])) {
     popMessage($_GET['message']);
 }
-$categories = $mysqli->query("SELECT product_subtypes.product_subtype_name AS productSubtypeName,
-                                            products_final.product_name AS productName,
-                                            product_types.product_type_name AS productTypeName,
-                                            product_categories.category_name AS productCategoryName,
-                                            venues.venue_name AS venueName,
-                                            SUM(purchases.product_price) AS totalSpent
-                                FROM products_final,purchases,product_subtypes,product_categories,product_types,venues
-                                WHERE purchases.product_id=products_final.product_id
-                                AND products_final.product_subtype_id=product_subtypes.product_subtype_id
-                                AND products_final.product_subtype_id=product_subtypes.product_subtype_id
-                                AND product_subtypes.product_type_id=product_types.product_type_id
-                                AND product_types.category_id=product_categories.category_id
-                                AND purchases.venue_id=venues.venue_id
-                                AND purchases.date_of_purchase BETWEEN '$startDateDb' AND '$endDateDb'
-                                GROUP BY $groupByVariable");
 
-
+$results = showExpensesQuery($startDateDb, $endDateDb, $groupByVariable);
 ?>
 
 <!DOCTYPE html>
@@ -100,7 +88,7 @@ $categories = $mysqli->query("SELECT product_subtypes.product_subtype_name AS pr
 
             var data = google.visualization.arrayToDataTable([
                 ['Task', 'Euros'],
-                <?php while ($row2 = $categories->fetch_assoc()) {
+                <?php while ($row2 = $results->fetch_assoc()) {
                     echo "['" . $row2[$groupByVariable] . "', " . $row2['totalSpent'] . "],";
                 }
                 ?>
@@ -120,22 +108,7 @@ $categories = $mysqli->query("SELECT product_subtypes.product_subtype_name AS pr
 <body>
 
     <?php
-    $categories = $mysqli->query("SELECT product_subtypes.product_subtype_name AS productSubtypeName,
-                                            products_final.product_name AS productName,
-                                            product_types.product_type_name AS productTypeName,
-                                            product_categories.category_name AS productCategoryName,
-                                            venues.venue_name AS venueName,
-                                            SUM(purchases.product_price) AS totalSpent
-                                FROM products_final,purchases,product_subtypes,product_categories,product_types,venues
-                                WHERE purchases.product_id=products_final.product_id
-                                AND products_final.product_subtype_id=product_subtypes.product_subtype_id
-                                AND products_final.product_subtype_id=product_subtypes.product_subtype_id
-                                AND product_subtypes.product_type_id=product_types.product_type_id
-                                AND product_types.category_id=product_categories.category_id
-                                AND purchases.venue_id=venues.venue_id
-                                AND purchases.date_of_purchase BETWEEN '$startDateDb' AND '$endDateDb'
-                                GROUP BY $groupByVariable");
-
+    $results2 = showExpensesQuery($startDateDb, $endDateDb, $groupByVariable);
     ?>
 
     <div class="container">
@@ -179,7 +152,7 @@ $categories = $mysqli->query("SELECT product_subtypes.product_subtype_name AS pr
                 <tbody>
                     <?php
                     $totalExpences = 0;
-                    while ($row = $categories->fetch_assoc()) {
+                    while ($row = $results2->fetch_assoc()) {
 
                         $totalExpences += $row["totalSpent"];
 
