@@ -2,17 +2,17 @@
 include("includes/header.php");
 require("includes/db.php");
 include("includes/functions.php");
-
+include("includes/dbInserts.php");
 
 if (!isset($_GET['productName'])) {
   header("location: select_product.php");
 }
+
 // Query to get product id from database
 $productName = $_GET['productName'];
-// $productName = 'Protergia - Ekkatharistikos';
 
 $products = $mysqli->query("SELECT products_final.product_id AS productId, 
-                                   product_units.product_unit_name AS productUnitName
+                                    product_units.product_unit_name AS productUnitName
                             FROM products_final
                             LEFT JOIN product_units ON products_final.product_unit_id = product_units.product_unit_id
                             WHERE product_name = '$productName'");
@@ -58,26 +58,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $offerId = $row3['offer_id'];
   }
 
-  /*Query to add new purchase to the database*/
-  $sql = "INSERT INTO purchases (product_id, product_price, qnt_of_product, price_per_qnt, date_of_purchase, venue_id, offer_id, number_of_items, price_per_item) 
-                        VALUES ('$productId2', '$productPrice', '$productQuantity', '$pricePerQuantity', '$dateOfPurchase', '$venueId', '$offerId', '$qntItems', '$pricePerQuantityOfItems')";
-
-  if ($mysqli->query($sql) === true) {
-    header("location: show_purchases.php?message=Purchased logged successfully!");
-  } else {
-    $_SESSION['message'] = "New service was not added!";
-    header("location: error.php?message=Fuck");
-  }
+  insertEntryToPurchases($productId2, $productPrice, $productQuantity, $pricePerQuantity, $dateOfPurchase, $venueId, $offerId, $qntItems, $pricePerQuantityOfItems);
 }
 ?>
 
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<link rel="stylesheet" type="text/css" href="src/css/navbar.css" />
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="src/js/jquery-1.4.2.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="src/css/style.css" />
-<!------ Include the above in your HEAD tag ---------->
+<!DOCTYPE html>
+
+<head>
+  <title>Log Purchase</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <link rel="stylesheet" type="text/css" href="src/css/navbar.css" />
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script type="text/javascript" src="src/js/jquery-1.4.2.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="src/css/style.css" />
+</head>
 
 <form class="form-horizontal custom-form" action="add_purchase.php" method="post" enctype="multipart/form-data">
   <fieldset class="myForm">
@@ -90,7 +87,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
       </div>
     </div>
-
 
     <!-- Enter Venue -->
     <div class="form-group">

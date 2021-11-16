@@ -2,8 +2,7 @@
 include('db.php');
 
 //Function to return minimum price per item
-function min_price($prod_id)
-{
+function min_price($prod_id) {
 
     global $mysqli;
 
@@ -21,8 +20,7 @@ function min_price($prod_id)
 }
 
 //Function to return highest price per item
-function max_price($prod_id)
-{
+function max_price($prod_id) {
 
     global $mysqli;
 
@@ -40,8 +38,7 @@ function max_price($prod_id)
 }
 
 //Function to return average price per item
-function avg_price($prod_id)
-{
+function avg_price($prod_id) {
 
     global $mysqli;
 
@@ -59,8 +56,7 @@ function avg_price($prod_id)
 }
 
 //Function to return highest price per quantity
-function max_price_per($prod_id)
-{
+function max_price_per($prod_id) {
 
     global $mysqli;
 
@@ -79,8 +75,7 @@ function max_price_per($prod_id)
 }
 
 //Function to return lowest price per quantity
-function min_price_per($prod_id)
-{
+function min_price_per($prod_id) {
 
     global $mysqli;
 
@@ -99,8 +94,7 @@ function min_price_per($prod_id)
 }
 
 //Function to return average price per quantity of product
-function avg_price_per($prod_id)
-{
+function avg_price_per($prod_id) {
 
     global $mysqli;
 
@@ -118,8 +112,7 @@ function avg_price_per($prod_id)
 }
 
 //Function to return venue where highest price per quantity was recorded
-function venue_per_max($prod_id)
-{
+function venue_per_max($prod_id) {
 
     global $mysqli;
 
@@ -142,8 +135,7 @@ function venue_per_max($prod_id)
 }
 
 //Function to return venue where lowest price per quantity was recorded
-function venue_per_min($prod_id)
-{
+function venue_per_min($prod_id) {
 
     global $mysqli;
 
@@ -166,8 +158,7 @@ function venue_per_min($prod_id)
 }
 
 //Function to return venue where highest price was recorded
-function venue_max($prod_id)
-{
+function venue_max($prod_id) {
 
     global $mysqli;
 
@@ -190,8 +181,7 @@ function venue_max($prod_id)
 }
 
 //Function to return venue where lowest price was recorded
-function venue_min($prod_id)
-{
+function venue_min($prod_id) {
 
     global $mysqli;
 
@@ -214,37 +204,8 @@ function venue_min($prod_id)
     return $venue_min;
 }
 
-//Function that checks if the requested entry allready exists in the database
-function checkDbForEntry2($tableName, $collumnName, $condition, $action,)
-{
-    global $mysqli;
-    $result = $mysqli->query("SELECT * FROM $tableName 
-                                WHERE $collumnName = '$condition'");
-    if ($result->num_rows > 0) {
-
-        unset($_SERVER['REQUEST_METHOD']);
-        unset($_POST['category']);
-        header("location: $action");
-    }
-}
-
-//Function that checks if the requested entry allready exists in the database
-function checkDbForEntrySimple($tableName, $collumnName, $condition)
-{
-    global $mysqli;
-    $result = $mysqli->query("SELECT * FROM $tableName 
-                                WHERE $collumnName = '$condition'");
-    if ($result->num_rows > 0) {
-        return true;
-    }
-    if (!($result->num_rows > 0)) {
-        return false;
-    }
-}
-
 //Function that creates pop-up message
-function popMessage($message)
-{
+function popMessage($message) {
 
     // $message = "lala";
     echo '<script type ="text/JavaScript">';

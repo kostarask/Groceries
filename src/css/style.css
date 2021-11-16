@@ -384,6 +384,8 @@ th{
 	color: black;
 }
 
+
+
 .btn-primary{
 	background-color: var(--buttonPrimaryColor);
 	border-color: var(--buttonPrimaryColor);
@@ -428,6 +430,7 @@ th{
 
 	padding-left: 10px;
 	padding-right: 10px;
+	padding-bottom: 10px;
 
 	background-color: var(--headerPrimaryColor);
 	
@@ -530,3 +533,4 @@ select.form-control{
 	font-weight: bold;
 	font-size: 1.5rem;
 }
+

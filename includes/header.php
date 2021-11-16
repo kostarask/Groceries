@@ -1,25 +1,7 @@
-<?php
-require("db.php");
-
-//Query that gets all data from products table
-$productsHeader = $mysqli->query("SELECT products_final.product_name AS prodName, 
-                                   product_subtypes.product_subtype_name AS productSubtype,
-                                   product_types.product_type_name AS productType,
-                                   product_categories.category_name AS productCategory,
-                                   product_units.product_unit_name AS productUnits,
-                                   product_tags.product_tag_name AS productTag
-                             FROM products_final,product_subtypes,product_types,product_categories,product_units,product_tags
-                             WHERE products_final.product_subtype_id=product_subtypes.product_subtype_id
-                             AND product_subtypes.product_type_id=product_types.product_type_id
-                             AND product_types.category_id=product_categories.category_id
-                             AND products_final.product_unit_id=product_units.product_unit_id
-                             AND products_final.product_tag_id=product_tags.product_tag_id");
-?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <title>Bootstrap Example</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -48,7 +30,7 @@ $productsHeader = $mysqli->query("SELECT products_final.product_name AS prodName
             <ul class="dropdown-menu">
               <li><a class="dropdown-options" href="show_purchases.php">Purchases</a></li>
               <li><a class="dropdown-options" href="show_products.php">Products</a></li>
-              <li><a class="dropdown-options" href="show_product_categories.php">Categories</a></li>
+              <li><a class="dropdown-options" href="show_product_categories.php">Product Categories</a></li>
               <li><a class="dropdown-options" href="show_product_types.php">Product Types</a></li>
               <li><a class="dropdown-options" href="show_product_subtypes.php">Product Subtypes</a></li>
               <li><a class="dropdown-options" href="show_venues.php">Venues</a></li>
@@ -69,16 +51,7 @@ $productsHeader = $mysqli->query("SELECT products_final.product_name AS prodName
           </li>
         </ul>
         <form class="navbar-form navbar-right" action="search.php" method="post" enctype="multipart/form-data">
-          <input list="products_header" id="product_name" name="product_name" placeholder="Search for product..." class="form-control" required autocomplete="off" type="text">
-          <datalist id="products_header">
-            <optgroup label="Products">
-              <?php
-              // while ($row = $productsHeader->fetch_assoc()) {
-              //   echo '<option value = "' . $row["prodName"] . '">' . $row["productSubtype"] . ', ' . $row["productType"] . ', ' . $row["productCategory"] . ', ' . $row["productTag"] . '</option>';
-              // }
-              ?>
-            </optgroup>
-          </datalist>
+          <input list="products_header" id="product_name" name="product_name" placeholder="Search for product..." class="form-control" autocomplete="off" type="text">
           <button type="submit" class="btn btn-primary">Search</button>
         </form>
       </div>

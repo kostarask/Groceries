@@ -79,7 +79,7 @@ $categories = $mysqli->query("SELECT product_subtypes.product_subtype_name AS pr
 <!DOCTYPE html>
 
 <head>
-    <title>Test</title>
+    <title>Expenses</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>

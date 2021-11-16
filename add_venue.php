@@ -2,51 +2,33 @@
 include("includes/header.php");
 require("includes/db.php");
 include("includes/functions.php");
+include("includes/dbInserts.php");
 
 if (isset($_GET['message'])) {
   popMessage($_GET['message']);
 }
 
-// Function that inserts entry into Database
-function insertEntryToDatabase() {
-  global $mysqli;
+if (isset($_POST['venue_name'])) {
 
-  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-    $venue_name = $_POST['venue_name'];
-
-    checkDbForEntry2(
-      'venues',
-      'venue_name',
-      $venue_name,
-      'add_venue.php?message=Error: Venue already exists!'
-    );
-  }
-
-
-
-  if (!($_SERVER['REQUEST_METHOD'] == 'POST')) {
-    return;
-  }
-
-  $sql2 = "INSERT INTO venues (venue_name) VALUES ('$venue_name')";
-
-  if ($mysqli->query($sql2) === true) {
-    header("location: show_venues.php?message=New venue added successfully!");
+  if (checkDbForEntry('venues', 'venue_name', $_POST['venue_name'])) {
+    header("location:add_venue.php?message=Venue already exists!");
   } else {
-    header("location: show_venues.php?message=ERROR: New venue was not added!");
+    insertEntryToVenues($_POST['venue_name']);
   }
 }
 
-insertEntryToDatabase();
 ?>
 
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<link rel="stylesheet" type="text/css" href="src/css/style.css" />
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="src/js/jquery-1.4.2.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+<!DOCTYPE html>
+
+<head>
+  <title>Add Venue</title>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <link rel="stylesheet" type="text/css" href="src/css/style.css" />
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script type="text/javascript" src="src/js/jquery-1.4.2.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</head>
 
 <form class="form-horizontal custom-form" action="add_venue.php" method="post" enctype="multipart/form-data">
   <fieldset class="myForm">
