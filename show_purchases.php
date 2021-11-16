@@ -25,13 +25,12 @@ if (isset($_POST['date_range_picker'])) {
     $datesArray = explode(" - ", $initialDateRange);
 
     $php_start_date = $datesArray[0];
-    $php_end_date = $datesArray[1];
-
-    $startDateDb = str_replace("/", "-", $datesArray[0]);
-    $endDateDb = str_replace("/", "-", $datesArray[1]);
-
     $startDate = date('d/m/Y', strtotime($datesArray[0]));
+    $startDateDb = str_replace("/", "-", $datesArray[0]);
+
+    $php_end_date = $datesArray[1];
     $endDate = date('d/m/Y', strtotime($datesArray[1]));
+    $endDateDb = str_replace("/", "-", $datesArray[1]);
 }
 
 $purchases = showPurchasesQuery($startDateDb, $endDateDb)
