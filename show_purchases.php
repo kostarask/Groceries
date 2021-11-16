@@ -8,6 +8,17 @@ if (isset($_GET['message'])) {
     popMessage($_GET['message']);
 }
 
+//Create initial starting and ending date
+$php_start_date = date('Y/m/d', strtotime("2019-01-01"));
+$php_end_date = date('Y/m/d');
+
+$startDate = date('d/m/Y', strtotime($php_start_date));
+$startDateDb = str_replace("/", "-", $php_start_date);
+
+$endDate = date('d/m/Y');
+$endDateDb = str_replace("/", "-", $php_end_date);
+
+// Update starting and ending dates when selected in form
 if (isset($_POST['date_range_picker'])) {
 
     $initialDateRange = $_POST['date_range_picker'];
@@ -21,39 +32,9 @@ if (isset($_POST['date_range_picker'])) {
 
     $startDate = date('d/m/Y', strtotime($datesArray[0]));
     $endDate = date('d/m/Y', strtotime($datesArray[1]));
-} else {
-
-    $php_start_date = date('Y/m/d', strtotime("2019-01-01"));
-    $php_end_date = date('Y/m/d');
-
-    $startDate = date('d/m/Y', strtotime($php_start_date));
-    $startDateDb = str_replace("/", "-", $php_start_date);
-
-    $endDate = date('d/m/Y');
-    $endDateDb = str_replace("/", "-", $php_end_date);
 }
 
-$purchases = $mysqli->query("SELECT purchases.purchace_id AS purchaseId,
-                                    products_final.product_name AS productName,
-                                    products_final.product_id AS productId,
-                                    purchases.product_price AS productPrice,
-                                    purchases.number_of_items AS munOfItems,
-                                    purchases.price_per_item AS pricePerItem,
-                                    purchases.date_of_purchase AS purchaseDate,
-                                    venues.venue_name AS venueName,
-                                    purchases.qnt_of_product AS productQuantity,
-                                    purchases.price_per_qnt AS pricePerQuantity,
-                                    product_tags.product_tag_name AS productTag,
-                                    product_units.product_unit_name AS unitName,
-                                    offers.offer_name AS offerName
-                            FROM products_final,purchases,venues,product_tags,product_units,offers
-                            WHERE purchases.product_id=products_final.product_id
-                            AND purchases.venue_id=venues.venue_id
-                            AND products_final.product_tag_id=product_tags.product_tag_id
-                            AND products_final.product_unit_id=product_units.product_unit_id
-                            AND purchases.offer_id=offers.offer_id
-                            AND purchases.date_of_purchase BETWEEN '$startDateDb' AND '$endDateDb'
-                            ORDER BY date_of_purchase DESC");
+$purchases = showPurchasesQuery($startDateDb, $endDateDb)
 ?>
 
 <!DOCTYPE html>

@@ -8,20 +8,7 @@ if (isset($_GET['message'])) {
   popMessage($_GET['message']);
 }
 
-$products_array2 = $mysqli->query("SELECT products_final.product_id AS productId,
-                                                  products_final.product_name AS productName, 
-                                                  product_units.product_unit_name AS productUnit,
-                                                  product_subtypes.product_subtype_name AS productSubtype,
-                                                  product_types.product_type_name AS productType,
-                                                  product_categories.category_name AS productCategory,
-                                                  product_tags.product_tag_name AS productTag
-                                            FROM products_final, product_units, product_subtypes, product_types, product_categories, product_tags
-                                            WHERE products_final.product_unit_id=product_units.product_unit_id
-                                            AND products_final.product_subtype_id=product_subtypes.product_subtype_id
-                                            AND product_subtypes.product_type_id=product_types.product_type_id
-                                            AND product_types.category_id=product_categories.category_id
-                                            AND products_final.product_tag_id=product_tags.product_tag_id");
-
+$products = showProductsQuery();
 ?>
 
 <!DOCTYPE html>
@@ -72,7 +59,7 @@ $products_array2 = $mysqli->query("SELECT products_final.product_id AS productId
         <tbody>
 
           <?php
-          while ($row = $products_array2->fetch_assoc()) {
+          while ($row = $products->fetch_assoc()) {
 
             echo '<tr>
                       <td>' . $row["productId"] . '</td>
