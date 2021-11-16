@@ -4,7 +4,7 @@ require("includes/db.php");
 include("includes/functions.php");
 
 
-if(!isset($_GET['productName'])){
+if (!isset($_GET['productName'])) {
   header("location: select_product.php");
 }
 // Query to get product id from database
@@ -40,8 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
   /**TODO!!!!! When units are items shit */
-  $pricePerQuantity = $productPrice/($productQuantity*$qntItems);
-  $pricePerQuantityOfItems = $productPrice/$qntItems;
+  $pricePerQuantity = $productPrice / ($productQuantity * $qntItems);
+  $pricePerQuantityOfItems = $productPrice / $qntItems;
 
   // Query to get venue id from database according to venue name
   $venueIds = $mysqli->query("SELECT venue_id FROM venues where venue_name = '$venueName'");
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   while ($row3 = $venueIds->fetch_assoc()) {
     $venueId = $row3['venue_id'];
   }
-  
+
   // Query to get offer id from database according to offer name
   $offerIds = $mysqli->query("SELECT offer_id FROM offers where offer_name = '$offerName'");
 
@@ -61,12 +61,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $sql = "INSERT INTO purchases (product_id, product_price, qnt_of_product, price_per_qnt, date_of_purchase, venue_id, offer_id, number_of_items, price_per_item) 
                         VALUES ('$productId2', '$productPrice', '$productQuantity', '$pricePerQuantity', '$dateOfPurchase', '$venueId', '$offerId', '$qntItems', '$pricePerQuantityOfItems')";
 
-  if($mysqli->query($sql)===true){
+  if ($mysqli->query($sql) === true) {
     header("location: show_purchases.php?message=Purchased logged successfully!");
-  }else{
-      $_SESSION['message']= "New service was not added!";
-      header( "location: error.php?message=Fuck" );
-  }    
+  } else {
+    $_SESSION['message'] = "New service was not added!";
+    header("location: error.php?message=Fuck");
+  }
 }
 ?>
 
@@ -79,94 +79,94 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!------ Include the above in your HEAD tag ---------->
 
 <form class="form-horizontal custom-form" action="add_purchase.php" method="post" enctype="multipart/form-data">
-<fieldset class= "myForm">
-<legend >New Purchase of: <b><u><?php echo $productName?></u></b></legend>
-  <!-- Enter Date -->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="product_name">Date of Purchase:</label>  
-    <div class="col-md-4">
-      <input type= "date" id="date_of_purchase" name="date_of_purchase" placeholder="DATE" class="form-control input-md" required type="text">
-      
-    </div>
-  </div>
-  
-  
-  <!-- Enter Venue -->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="venue">Venue:</label>  
-    <div class="col-md-4">
-      <input list = "venues" id="venue" name="venue" placeholder="Please select venue..." class="form-control input-md" required autocomplete="off" type="text">
-        <datalist id="venues">
-          <optgroup label= "Venues">
-            <?php
-
-              while($row2 = $venues -> fetch_assoc()){
-                echo '<option value = "'.$row2["venue_name"].'"></option>';
-              }
-              
-            ?>
-            </optgroup>
-        </datalist>
-    </div>
-  </div>
-    
-  <!-- Enter Price -->
+  <fieldset class="myForm">
+    <legend>New Purchase of: <b><u><?php echo $productName ?></u></b></legend>
+    <!-- Enter Date -->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="product_price">Product price:</label>  
+      <label class="col-md-4 control-label" for="product_name">Date of Purchase:</label>
       <div class="col-md-4">
-      <input type="number" min="0" step="any" id="product_price" name="product_price" placeholder="Please enter the price..." class="form-control input-md" required  autocomplete= "off">
-  
+        <input type="date" id="date_of_purchase" name="date_of_purchase" placeholder="DATE" class="form-control input-md" required type="text">
+
       </div>
     </div>
-  
+
+
+    <!-- Enter Venue -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="venue">Venue:</label>
+      <div class="col-md-4">
+        <input list="venues" id="venue" name="venue" placeholder="Please select venue..." class="form-control input-md" required autocomplete="off" type="text">
+        <datalist id="venues">
+          <optgroup label="Venues">
+            <?php
+
+            while ($row2 = $venues->fetch_assoc()) {
+              echo '<option value = "' . $row2["venue_name"] . '"></option>';
+            }
+
+            ?>
+          </optgroup>
+        </datalist>
+      </div>
+    </div>
+
+    <!-- Enter Price -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="product_price">Product price:</label>
+      <div class="col-md-4">
+        <input type="number" min="0" step="any" id="product_price" name="product_price" placeholder="Please enter the price..." class="form-control input-md" required autocomplete="off">
+
+      </div>
+    </div>
+
     <!-- Enter Quantity of items -->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="num_of_items">Number of Products:</label>  
+      <label class="col-md-4 control-label" for="num_of_items">Number of Products:</label>
       <div class="col-md-4">
-      <input type="number" min="1"  id="num_of_items" name="num_of_items" placeholder="Please enter the number of products..." class="form-control input-md" required  autocomplete= "off">
-  
+        <input type="number" min="1" id="num_of_items" name="num_of_items" placeholder="Please enter the number of products..." class="form-control input-md" required autocomplete="off">
+
       </div>
     </div>
-  
-  <!--TODO!!!! Disable if units=ITEM -->
-  <!-- Enter Quantity -->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="product_quantity">Product quantity in <u><?php echo $productUnit?></u>:</label>  
-    <div class="col-md-4">
-    <input type="number" min="0" step="any" id="product_quantity" name="product_quantity" placeholder="Please enter the quantity.." class="form-control input-md" required autocomplete= "off">
 
+    <!--TODO!!!! Disable if units=ITEM -->
+    <!-- Enter Quantity -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="product_quantity">Product quantity in <u><?php echo $productUnit ?></u>:</label>
+      <div class="col-md-4">
+        <input type="number" min="0" step="any" id="product_quantity" name="product_quantity" placeholder="Please enter the quantity.." class="form-control input-md" required autocomplete="off">
+
+      </div>
     </div>
-  </div>
 
-  <!-- Enter Offer -->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="offer">Offer:</label>  
-    <div class="col-md-4">
-      <input list = "offers" id="offer" name="offer" placeholder="Please select offer..." class="form-control input-md" autocomplete="off" type="text">
+    <!-- Enter Offer -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="offer">Offer:</label>
+      <div class="col-md-4">
+        <input list="offers" id="offer" name="offer" placeholder="Please select offer..." class="form-control input-md" autocomplete="off" type="text">
         <datalist id="offers">
-          <optgroup label= "offers">
+          <optgroup label="offers">
             <?php
 
-              while($row2 = $offers -> fetch_assoc()){
-                echo '<option value = "'.$row2["offer_name"].'"></option>';
-              }
-              
+            while ($row2 = $offers->fetch_assoc()) {
+              echo '<option value = "' . $row2["offer_name"] . '"></option>';
+            }
+
             ?>
-            </optgroup>
+          </optgroup>
         </datalist>
+      </div>
     </div>
-  </div>
 
-  <!-- Hidden input for product ID -->
-  <input type="hidden" id="product_id" name="product_id" value="<?php echo $productID?>">
-    
-<!-- Button -->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="singlebutton"></label>
-    <div class="col-md-4">
-      <input type="submit" value="Add Purchase" name="modify" class="btn btn-block btn-primary" />
+    <!-- Hidden input for product ID -->
+    <input type="hidden" id="product_id" name="product_id" value="<?php echo $productID ?>">
+
+    <!-- Button -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="singlebutton"></label>
+      <div class="col-md-4">
+        <input type="submit" value="Add Purchase" name="modify" class="btn btn-block btn-primary" />
+      </div>
     </div>
-  </div>
 
-</fieldset>
+  </fieldset>
 </form>
