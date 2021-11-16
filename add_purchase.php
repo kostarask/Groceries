@@ -9,6 +9,7 @@ if (!isset($_GET['productName'])) {
 }
 // Query to get product id from database
 $productName = $_GET['productName'];
+// $productName = 'Protergia - Ekkatharistikos';
 
 $products = $mysqli->query("SELECT products_final.product_id AS productId, 
                                    product_units.product_unit_name AS productUnitName

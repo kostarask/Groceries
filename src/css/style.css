@@ -10,6 +10,8 @@
 	--backgroundColor: hsl(359, 46%, 58%);
 }
 
+/* Navigation Bar Styling */
+
 .navbar-inverse .navbar-brand,
 .navbar-inverse .navbar-nav>li>a{
 	color: var(--backTextColor);
@@ -36,6 +38,53 @@ ul.dropdown-menu{
 
 .navbar-nav > a > .dropdown-options:hover { 
 	background-color: var(--buttonHoverColor);
+}
+
+ul.dropdown-menu>li>a{
+    color: var(--backTextColor);
+}
+
+.navbar-inverse .navbar-toggle {
+    border-color: var(--buttonPrimaryColor);
+}
+
+.navbar-toggle {    
+    background-color: var(--buttonPrimaryColor);
+}
+
+.navbar-inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:hover{
+    background-color: var(--buttonHoverColor);
+}
+
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover{
+    background-color: var(--buttonHoverColor);
+}
+
+.navbar-brand{
+    background-color: var(--buttonPrimaryColor);
+    font-size: 2rem;
+}
+
+.navbar-fixed-top {
+    top: 0;
+    border-width: 0 0 0;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: var(--headerPrimaryColor);
+}
+
+.navbar-inverse {
+    background-color: var(--headerPrimaryColor);
+    border-color: #080808;
+}
+
+.dropdown .dropdown-menu a:hover{
+	background-color: var(--buttonHoverColor); 
+	text-decoration: none;
+}
+
+ul.dropdown-menu{
+	background-color: var(--headerPrimaryColor);
 }
 
 body{
