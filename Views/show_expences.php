@@ -1,8 +1,6 @@
 <?php
 include("../includes/header.php");
-require("../includes/db.php");
-include("../includes/functions.php");
-include("../includes/dbQueries.php");
+include("../includes/includes.php");
 
 //Create initial starting and ending date
 $php_start_date = date('Y/m/d', strtotime("2019-01-01"));

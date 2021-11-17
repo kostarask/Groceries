@@ -1,7 +1,6 @@
 <?php
 include("../includes/header.php");
-require("../includes/db.php");
-include("../includes/functions.php");
+include("../includes/includes.php");
 
 if (isset($_GET['productName'])) {
 

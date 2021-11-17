@@ -1,6 +1,6 @@
 <?php
 // include('db.php');
-require('Model\db.php');
+require('..\Model\db.php');
 
 // Function that returns all from given tableName
 function queryAll($tableName) {
