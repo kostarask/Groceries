@@ -1,6 +1,6 @@
 <?php
-include('db.php');
-
+// include('db.php');
+require('Model\db.php');
 //Function to return minimum price per item
 function min_price($prod_id) {
 

@@ -1,8 +1,8 @@
 <?php
-include("includes/header.php");
-require("includes/db.php");
-include("includes/functions.php");
-include("includes/dbQueries.php");
+include("../includes/header.php");
+require("../includes/db.php");
+include("../includes/functions.php");
+include("../includes/dbQueries.php");
 
 //Create initial starting and ending date
 $php_start_date = date('Y/m/d', strtotime("2019-01-01"));
@@ -75,7 +75,7 @@ $results = showExpensesQuery($startDateDb, $endDateDb, $groupByVariable);
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="src/css/style.css">
+    <link rel="stylesheet" href="../src/css/style.css">
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
@@ -181,7 +181,7 @@ $results = showExpensesQuery($startDateDb, $endDateDb, $groupByVariable);
         </div>
 
     </div>
-    <script src="src/js/tablesort.js" defer></script>
+    <script src="../src/js/tablesort.js" defer></script>
 </body>
 
 <script>

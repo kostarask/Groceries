@@ -1,5 +1,6 @@
 <?php
-include('db.php');
+// include('db.php');
+require('Model\db.php');
 
 //Function that checks if the requested entry allready exists in the database
 function checkDbForEntry2($tableName, $collumnName, $condition, $action,) {

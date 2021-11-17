@@ -1,5 +1,6 @@
 <?php
-include('db.php');
+// include('db.php');
+require('Model\db.php');
 
 // Function that returns all from given tableName
 function queryAll($tableName) {
@@ -112,7 +113,7 @@ function showPurchasesQuery($startDateDb, $endDateDb) {
         LEFT JOIN product_units ON products_final.product_unit_id=product_units.product_unit_id
         LEFT JOIN offers ON purchases.offer_id=offers.offer_id
         WHERE  purchases.date_of_purchase BETWEEN '$startDateDb' AND '$endDateDb'
-        ORDER BY date_of_purchase DESC"
+        ORDER BY purchaseId DESC"
     );
 
     return $results;

@@ -1,7 +1,7 @@
 <?php
-include("includes/header.php");
-require("includes/db.php");
-include("includes/functions.php");
+include("../includes/header.php");
+require("../includes/db.php");
+include("../includes/functions.php");
 
 $keywords = '';
 $result_count = 0;
@@ -37,8 +37,8 @@ if (isset($_POST['product_name']) && ($_POST['product_name'] != '')) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="src/css/style.css">
-  <link rel="stylesheet" href="src/css/search.css">
+  <link rel="stylesheet" href="../src/css/style.css">
+  <link rel="stylesheet" href="../src/css/search.css">
 </head>
 
 <body>
@@ -86,5 +86,5 @@ if (isset($_POST['product_name']) && ($_POST['product_name'] != '')) {
       </table>
     </div>
   </div>
-  <script src="src/js/tablesort.js"></script>
+  <script src="../src/js/tablesort.js"></script>
 </body>
