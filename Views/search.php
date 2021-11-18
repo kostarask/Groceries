@@ -1,26 +1,14 @@
 <?php
 include("../includes/header.php");
 include("../includes/includes.php");
+include("../Controllers/searchLogic.php");
 
 $keywords = '';
 $result_count = 0;
 $products_array2 = [];
 
 if (isset($_POST['product_name']) && ($_POST['product_name'] != '')) {
-  $keywords = trim($_POST['product_name']);
-
-  $query = "SELECT products_final.product_id AS productId,
-                products_final.product_name AS productName,
-                product_subtypes.product_subtype_name AS productSubtype
-                FROM products_final
-                LEFT JOIN product_subtypes ON products_final.product_subtype_id = product_subtypes.product_subtype_id
-                WHERE ";
-
-  $searchParameter = explode(" ", $keywords);
-  foreach ($searchParameter as $word) {
-    $query .= " products_final.product_name LIKE '%$word%' OR";
-  }
-  $query = substr($query, 0, strlen($query) - 3);
+  $query = searchLogic($_POST['product_name']);
 
   $products_array2 = $mysqli->query($query);
 

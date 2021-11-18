@@ -1,53 +1,21 @@
 <?php
 include("../includes/header.php");
 include("../includes/includes.php");
+include("../Controllers/chartsQueries.php");
 
 if (isset($_GET['productName'])) {
-
-  $tempProdName = $_GET['productName'];
-
-  $getProdId = $mysqli->query("SELECT product_id FROM `products_final` WHERE product_name ='$tempProdName'");
-  while ($row5 = $getProdId->fetch_assoc()) {
-
-    $_GET['prod_id'] = $row5['product_id'];
-  }
+  $_GET['prod_id'] = getIdFromName($_GET['productName']);
 }
+
 if (isset($_GET['prod_id'])) {
 
-  $prodId = $_GET['prod_id'];
+  $chartExpencesForThisYear = chartExpencesForThisYear($_GET['prod_id']);
 
-  $chartExpencesForThisYear = $mysqli->query("SELECT purchases.price_per_item AS price, DATE_FORMAT(purchases.date_of_purchase,'%M') AS dateOfPurchase
-                                  FROM purchases
-                                  WHERE purchases.product_id=$prodId
-                                  AND YEAR(purchases.date_of_purchase)= YEAR(CURDATE())
-                                  ORDER BY purchases.date_of_purchase ");
+  $chartAvgPerYear = chartAvgPerYear($_GET['prod_id']);
 
-  $chartAvgPerYear = $mysqli->query("SELECT AVG(purchases.price_per_item) AS price, YEAR(purchases.date_of_purchase) AS dateOfPurchase
-                                    FROM purchases
-                                    WHERE purchases.product_id=$prodId
-                                    GROUP BY YEAR(purchases.date_of_purchase)
-                                    ");
+  $chartTotalPerYear = chartTotalPerYear($_GET['prod_id']);
 
-  $chartTotalPerYear = $mysqli->query("SELECT SUM(purchases.price_per_item) AS price, YEAR(purchases.date_of_purchase) AS dateOfPurchase
-                                    FROM purchases
-                                    WHERE purchases.product_id=$prodId
-                                    GROUP BY YEAR(purchases.date_of_purchase)
-                                    ");
-
-  $products_array2 = $mysqli->query("SELECT products_final.product_id AS productId,
-                                            products_final.product_name AS productName, 
-                                            product_units.product_unit_name AS productUnit,
-                                            product_subtypes.product_subtype_name AS productSubtype,
-                                            product_types.product_type_name AS productType,
-                                            product_categories.category_name AS productCategory,
-                                            product_tags.product_tag_name AS productTag
-                                      FROM products_final, product_units, product_subtypes, product_types, product_categories, product_tags
-                                      WHERE products_final.product_unit_id=product_units.product_unit_id
-                                      AND products_final.product_subtype_id=product_subtypes.product_subtype_id
-                                      AND product_subtypes.product_type_id=product_types.product_type_id
-                                      AND product_types.category_id=product_categories.category_id
-                                      AND products_final.product_tag_id=product_tags.product_tag_id
-                                      AND products_final.product_id=$prodId");
+  $products_array2 = showSelectedProductQuery($_GET['prod_id']);
 
   while ($row2 = $products_array2->fetch_assoc()) {
     $productId = $row2['productId'];
@@ -124,16 +92,8 @@ if (isset($_GET['prod_id'])) {
   </script>
 </head>
 
-
-
-
-<?php
-
-
-?>
-
 <body>
-  <div class="container grid-container-two-cols">
+  <div class="container grid-container-two-cols" style="grid-gap:5px;">
     <h1 class="hed grid-header-two-cols">
       <span>
         <?php echo $productName; ?>

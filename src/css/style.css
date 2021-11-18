@@ -90,14 +90,15 @@ ul.dropdown-menu{
 body{
 	background-color: var(--backgroundColor);
 	font-family: 'Open Sans', Times, serif;
-	font-size: 16px;
+	font-size: 2vmin;
 	display: flex;
 	justify-content: center;
 }
 
+
 .scrollable-element {
 	scrollbar-color: dark;
-  }
+}
 
 a{
 	color:var(--headerPrimaryColor);
@@ -176,12 +177,27 @@ form.form-horizontal{
     padding-top: 70px;
 }
 
+.btn{
+	font-size: 2vmin;
+}
+
+select,
+option{
+	background-color:var(--tableBackgroundColor) !important;
+	border:0px !important;
+	color: black;
+}
+select option:checked,
+select option:hover {
+    box-shadow: 0 0 10px 100px #000 inset;
+}
+
 th.lala{
 	text-align: right;
 }
 
 .hed{
-	font-size: 4rem;
+	font-size: 3.1vmin;
 	color: var(--backTextColor);
 	font-weight: 300;
 	text-align: center;
@@ -320,7 +336,7 @@ th{
 	grid-template-rows: max-content max-content minmax(auto, auto) max-content 1fr;
 
 	scrollbar-track-color: violet;
-	gap: 5px;
+	gap: 0px;
 
 	padding:10px;
 	padding-right: 25px;
@@ -380,8 +396,11 @@ th{
 
 .custom-input-field{
 
+	padding: 5px 2px;
+	border:0px;
 	border-radius: 4px;
 	color: black;
+	width: max-content;
 }
 
 
@@ -507,19 +526,21 @@ legend{
 	padding-top: 10px;
 	padding-bottom: 10px;
 	width:100%;
-	font-size: 3rem;
+	font-size: 3.1vmin;
 	color: var(--backTextColor);
 	white-space: nowrap;
 	border-bottom-color: var(--backTextColor);
 }
 
 form.form-horizontal.custom-form{
-	width:60vw;
+	width:70vw;
 	background-color: var(--headerPrimaryColor);
 	color: var(--backTextColor);
 
 	margin-top: 70px;
 	padding-top: 0;
+	padding-left: 10px;
+	padding-right: 10px;
 
 	border-radius: 20px;
 }
@@ -531,6 +552,5 @@ form.form-horizontal.custom-form{
 input.form-control,
 select.form-control{
 	font-weight: bold;
-	font-size: 1.5rem;
+	font-size: 2vmin;
 }
-

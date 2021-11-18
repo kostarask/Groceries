@@ -169,7 +169,7 @@ $results = showExpensesQuery($startDateDb, $endDateDb, $groupByVariable);
                 <thead>
                     <tr>
                         <?php
-                        echo '<th style="font-weight: bold; font-size:1.3em; text-align: right;">Total Expences:</th>';
+                        echo '<th style="font-weight: bold; font-size:1.3em; text-align: center;">Total Expences:</th>';
                         echo '<th style="font-weight: bold; font-size:1.3em; text-align: left;"> ' . $totalExpences . ' &euro;</th>';
                         ?>
                     </tr>

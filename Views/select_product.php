@@ -18,18 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 //Query that gets all data from products table
-$products = $mysqli->query("SELECT products_final.product_name AS productName, 
-                                    product_subtypes.product_subtype_name AS productSubtype,
-                                    product_types.product_type_name AS productType,
-                                    product_categories.category_name AS productCategory,
-                                    product_units.product_unit_name AS productUnits,
-                                    product_tags.product_tag_name AS productTag
-                            FROM products_final,product_subtypes,product_types,product_categories,product_units,product_tags
-                            WHERE products_final.product_subtype_id=product_subtypes.product_subtype_id
-                            AND product_subtypes.product_type_id=product_types.product_type_id
-                            AND product_types.category_id=product_categories.category_id
-                            AND products_final.product_unit_id=product_units.product_unit_id
-                            AND products_final.product_tag_id=product_tags.product_tag_id");
+$products = showProductsQuery();
 ?>
 <!DOCTYPE html>
 
@@ -38,10 +27,12 @@ $products = $mysqli->query("SELECT products_final.product_name AS productName,
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
   <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <link rel="stylesheet" type="text/css" href="../src/css/navbar.css" />
   <link rel="stylesheet" type="text/css" href="../src/css/style.css" />
   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-  <script type="text/javascript" src="src/js/jquery-1.4.2.min.js"></script>
+  <script type="text/javascript" src="../src/js/jquery-1.4.2.min.js"></script>
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <!------ Include the above in your HEAD tag ---------->
 </head>
 
 <form class="form-horizontal custom-form" action="select_product.php" method="post" enctype="multipart/form-data">

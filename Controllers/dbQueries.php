@@ -118,3 +118,27 @@ function showPurchasesQuery($startDateDb, $endDateDb) {
 
     return $results;
 }
+
+//Function that returns array with query results for show_products page
+function showSelectedProductQuery($prodID) {
+
+    global $mysqli;
+    $results = $mysqli->query(
+        "SELECT products_final.product_id AS productId,
+                products_final.product_name AS productName, 
+                product_units.product_unit_name AS productUnit,
+                product_subtypes.product_subtype_name AS productSubtype,
+                product_types.product_type_name AS productType,
+                product_categories.category_name AS productCategory,
+                product_tags.product_tag_name AS productTag
+        FROM products_final
+        LEFT JOIN product_units ON products_final.product_unit_id=product_units.product_unit_id
+        LEFT JOIN product_subtypes ON products_final.product_subtype_id=product_subtypes.product_subtype_id
+        LEFT JOIN product_types ON product_subtypes.product_type_id=product_types.product_type_id
+        LEFT JOIN product_categories ON product_types.category_id=product_categories.category_id
+        LEFT JOIN product_tags ON products_final.product_tag_id=product_tags.product_tag_id
+        WHERE product_id = '$prodID'"
+    );
+
+    return $results;
+}

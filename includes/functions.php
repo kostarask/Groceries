@@ -212,3 +212,15 @@ function popMessage($message) {
     echo 'alert("' . $message . '")';
     echo '</script>';
 }
+
+// Function that retrieves the product_id from db given the product_name
+function getIdFromName($prodName) {
+    global $mysqli;
+    $results = $mysqli->query("SELECT product_id FROM `products_final` WHERE product_name ='$prodName'");
+    while ($row5 = $results->fetch_assoc()) {
+
+        $result = $row5['product_id'];
+    }
+
+    return $result;
+}
